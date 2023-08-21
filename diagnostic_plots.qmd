@@ -1,0 +1,205 @@
+---
+title: "Diagnostic Plots"
+format:
+  pdf:
+    documentclass: report
+    toc: false
+    number-sections: false
+    highlight-style: github
+    fig-width: 10
+    fig-height: 10
+---
+# Repeated Sprint Ability Models
+## Disability Models
+### $\hat{R}$
+
+```{r,message=FALSE,warning=FALSE,echo=FALSE}
+
+targets::tar_load(rhat_plot_disability_rsa_model)
+
+rhat_plot_disability_rsa_model 
+
+
+```
+
+### Trace plots
+
+```{r,message=FALSE,warning=FALSE,echo=FALSE}
+
+targets::tar_load(trace_plot_disability_rsa_model)
+
+trace_plot_disability_rsa_model
+
+```
+
+### Posterior predictive check
+
+```{r,message=FALSE,warning=FALSE,echo=FALSE}
+
+targets::tar_load(pp_check_disability_rsa_model)
+
+pp_check_disability_rsa_model
+
+```
+
+## Classification Models
+### $\hat{R}$
+
+```{r,message=FALSE,warning=FALSE,echo=FALSE}
+
+targets::tar_load(rhat_plot_classif_rsa_model)
+
+rhat_plot_classif_rsa_model 
+
+
+```
+
+### Trace plots
+
+```{r,message=FALSE,warning=FALSE,echo=FALSE}
+
+targets::tar_load(trace_plot_classif_rsa_model)
+
+trace_plot_classif_rsa_model
+
+```
+
+### Posterior predictive check
+
+```{r,message=FALSE,warning=FALSE,echo=FALSE}
+
+targets::tar_load(pp_check_classif_rsa_model)
+
+pp_check_classif_rsa_model
+
+```
+
+# Sprint Velocity Models
+## Disability Models
+### $\hat{R}$
+
+```{r,message=FALSE,warning=FALSE,echo=FALSE}
+
+targets::tar_load(rhat_plot_disability_velocity_model)
+
+rhat_plot_disability_velocity_model 
+
+
+```
+
+### Trace plots
+
+```{r,message=FALSE,warning=FALSE,echo=FALSE}
+
+targets::tar_load(trace_plot_disability_velocity_model)
+
+trace_plot_disability_velocity_model
+
+```
+
+### Posterior predictive check
+
+```{r,message=FALSE,warning=FALSE,echo=FALSE}
+
+targets::tar_load(pp_check_disability_velocity_model)
+
+pp_check_disability_velocity_model
+
+```
+
+## Classification Models
+### $\hat{R}$
+
+```{r,message=FALSE,warning=FALSE,echo=FALSE}
+
+targets::tar_load(rhat_plot_classif_velocity_model)
+
+rhat_plot_classif_velocity_model 
+
+
+```
+
+### Trace plots
+
+```{r,message=FALSE,warning=FALSE,echo=FALSE}
+
+targets::tar_load(trace_plot_classif_velocity_model)
+
+trace_plot_classif_velocity_model
+
+```
+
+### Posterior predictive check
+
+```{r,message=FALSE,warning=FALSE,echo=FALSE}
+
+targets::tar_load(pp_check_classif_velocity_model)
+
+pp_check_classif_velocity_model
+
+```
+
+# Sprint Acceleration Models
+## Disability Models
+### $\hat{R}$
+
+```{r,message=FALSE,warning=FALSE,echo=FALSE}
+
+targets::tar_load(rhat_plot_disability_acceleration_model)
+
+rhat_plot_disability_acceleration_model 
+
+
+```
+
+### Trace plots
+
+```{r,message=FALSE,warning=FALSE,echo=FALSE}
+
+targets::tar_load(trace_plot_disability_acceleration_model)
+
+trace_plot_disability_acceleration_model
+
+```
+
+### Posterior predictive check
+
+```{r,message=FALSE,warning=FALSE,echo=FALSE}
+
+targets::tar_load(pp_check_disability_acceleration_model)
+
+pp_check_disability_acceleration_model
+
+```
+
+## Classification Models
+### $\hat{R}$
+
+```{r,message=FALSE,warning=FALSE,echo=FALSE}
+
+targets::tar_load(rhat_plot_classif_acceleration_model)
+
+rhat_plot_classif_acceleration_model 
+
+
+```
+
+### Trace plots
+
+```{r,message=FALSE,warning=FALSE,echo=FALSE}
+
+targets::tar_load(trace_plot_classif_acceleration_model)
+
+trace_plot_classif_acceleration_model
+
+```
+
+### Posterior predictive check
+
+```{r,message=FALSE,warning=FALSE,echo=FALSE}
+
+targets::tar_load(pp_check_classif_acceleration_model)
+
+pp_check_classif_acceleration_model
+
+```

@@ -1,24 +1,119 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
+.Random.seed|object|e33e22029544326e|||||||||||||||
+acceleration_data|stem|bc19a929bef4deed|effd4a8406712406|498a56aa25f40364|-399840953||t19590.5772070525s|4ff05336d644dae2|106|rds|local|vector|||0.05||
+classif_acceleration_model|stem|e3a3e767a833837f|0f17382ba5c83370|e91de3ac5d4fbb96|1328232803||t19590.6949587707s|f31201f14f0b31f7|53352690|rds|local|vector|||95.39||
+classif_acceleration_model_plot|stem|af5c79e0af1f3a43|1bfb62baa39b04fe|2647d1d252dde79f|1413294842||t19590.6997339639s|3e3d2a1411beaa16|179311504|rds|local|vector|||0.5||
+classif_rsa_model|stem|d5fb0cbc26110294|ef3aded8cd8b4d66|337d5c72ccb27840|-920064987||t19590.6869210377s|910a340846557f5e|57496748|rds|local|vector|||232.05|Rows containing NAs were excluded from the model.|
+classif_rsa_model_plot|stem|41735763066fa496|83bf620cff8e9a4a|835071e2a833d9d9|1694932202||t19590.6966391135s|0d1b5a4820f0d187|1005335324|rds|local|vector|||4.58||
 classif_rsa_models|stem|f96825df39a6c72b|a01fdec36ea5ebe2|1d58456f366a5114|1757189454||t19555.704514946s|09f5608f38f064e8|168869|rds|local|vector|||0.13||
 classif_rsa_plot|stem|05eee375f5aefa4e|9e355d4a996a9109|99301dd7c1ed4e7f|1769696263||t19555.7079463002s|ff026697d66e9a9f|75|rds|local|vector|||1.11|1m22mUsing size aesthetic for lines was deprecated in ggplot2 3.4.0.36mℹ39m Please use linewidth instead.. 1m22mRemoved 8 rows containing nonfinite values stat_smooth.. 1m22mRemoved 8 rows containing missing values geom_point.|
 classif_rsa_predicted_values|stem|06aea5bc7aa26315|518d17c51e2b4b69|291472b4effafb03|452496637||t19555.706494808s|2e7e6c023682954a|2740|rds|local|vector|||0.59||
 classif_rsa_summaries|stem|9cc0de6bee1ee6b4|61c3e76f6f02b658|7c95e2d1b2964ae3|-789859140||t19555.7045245921s|469d3670e76f1f42|174143|rds|local|vector|||0.01||
+classif_velocity_model|stem|763a083817ad44ea|c9670c0bb1b4dedd|d8cc322f09609f01|-713701868||t19590.6938230796s|e483d7e97a73b393|53147430|rds|local|vector|||121.39||
+classif_velocity_model_plot|stem|60b36fdf8ad300a0|d236b5b400853882|fb67de8b10cf739b|462448222||t19590.6995125269s|b71b6430adf8ada6|177932134|rds|local|vector|||0.56||
+combine_plots|function|d591f0767cb7da1e|||||||||||||||
+combined_classif_acceleration_plot|stem|7292c0de71d074af|856c758465bc41bf|139c9c976978c032|-1016548325||t19590.7036911282s|e3547158ae653eb1|179352255|rds|local|vector|||0||
+combined_classif_acceleration_plot_tiff|stem|b6942e665ec816ef|da4e0ad3d743085d|2d1ea31fe6af179d|-2022179120||t19590.7460777433s|41200f7f0df0ebd3|96|rds|local|vector|||5.75||
+combined_classif_rsa_plot|stem|24f48aee822d934f|ac939d96d708ae1f|9c60e0ae02db9943|-1694214692||t19590.7013616821s|210d24bc6532de01|1005507906|rds|local|vector|||0.01||
+combined_classif_rsa_plot_tiff|stem|b07d21693d041202|e12cabe2287dc5e0|a68c9b6a94ca1188|-714572438||t19590.7452414935s|e7d9c43b1c994be3|87|rds|local|vector|||42.84|1m22mRemoved 8 rows containing nonfinite values stat_smooth.. 1m22mRemoved 8 rows containing missing values geom_point.|
+combined_classif_velocity_plot|stem|8a4b7e00d1c04cbb|99a3762e8abd2597|d535ed383cbd8897|129038681||t19590.7034930966s|6a75a0e8fedf5264|178022413|rds|local|vector|||0||
+combined_classif_velocity_plot_tiff|stem|79b1e72914c3e6c3|66c09cb8b5966604|8dbdda7a1bb1320d|241825055||t19590.746162938s|8fcb0666863d3c08|92|rds|local|vector|||5.88||
+combined_disability_acceleration_plot|stem|0c3715cd254c2ed7|ef6c691301822dfe|ab9424d6e0e33ab3|-1221306284||t19590.7032816204s|f88c12e4e51003c7|179256359|rds|local|vector|||0||
+combined_disability_acceleration_plot_tiff|stem|6280b51eab8d2a1c|3845bfe0b6cc05b4|4de6186313a4b2a2|-1047668434||t19590.7459094822s|bf160f080fbf1dbb|99|rds|local|vector|||5.66||
+combined_disability_plot|stem|cde73436528ad5e7|248852379420e6fb|2c751a5787aee058|-38323034||t19590.4717110158s|09076e433db1d4f6|333124|rds|local|vector|||0.03||
+combined_disability_plot_tiff|stem|dfda60a1c7495b25|2a54f2f99f2adc47|285b70615671476d|1479987271||t19590.4727593877s|b3654bf3682c79ca|86|rds|local|vector|||1.19|1m22mRemoved 8 rows containing nonfinite values stat_smooth.. 1m22mRemoved 8 rows containing missing values geom_point.. 1m22mRemoved 8 rows containing nonfinite values stat_smooth.. 1m22mRemoved 8 rows containing missing values geom_point.|
+combined_disability_rsa_plot|stem|1fdacaf1001e6f66|476e9ed5e45c3b21|b87e20e363922242|1079174204||t19590.7028566278s|26e092d1cfd22975|1005123447|rds|local|vector|||0||
+combined_disability_rsa_plot_tiff|stem|0f67ec377277c567|51c8573ad69f4005|2fd57077fb6f0e89|1780796208||t19590.7458271563s|a3c4b57a6f0085ec|90|rds|local|vector|||41.27|1m22mRemoved 8 rows containing nonfinite values stat_smooth.. 1m22mRemoved 8 rows containing missing values geom_point.|
+combined_disability_velocity_plot|stem|43a740a468892824|9474a469c6304d4f|d17989137c2c1c76|-1798695687||t19590.7030787537s|f1caee0142159384|177996262|rds|local|vector|||0||
+combined_disability_velocity_plot_tiff|stem|25a4ac75c532ba9e|ec156d643d20da2d|4b335701a4173997|1385857931||t19590.7459928889s|17e1813002340629|93|rds|local|vector|||5.75||
+diagnostic_plots|stem|b777b88c54ae89eb|3397b7fa267d00fe|358909ec0bc64eae|-1956402850|diagnostic_plots.pdf*diagnostic_plots.qmd|t19590.7550037405s|015137969dc24e81|12950288|file|local|vector|||61.86||
+disability_acceleration_model|stem|763fd6d1962884a8|d09c0393a0fa6eda|30448e7c41aa6695|-86110486||t19590.6923876043s|ea9db8b70fb35793|53276488|rds|local|vector|||91.73||
+disability_acceleration_model_plot|stem|617f048205ab0c7e|a050c0a6474fe6ea|49e05f542b304e26|919229280||t19590.699001666s|e043d6faa2e7252e|179218949|rds|local|vector|||0.56||
+disability_rsa_model|stem|7612e5cd52898669|695d4ea4336074f4|18e0fcb89a8e972b|1114129955||t19590.6898414488s|27a19d4e700aacab|57516651|rds|local|vector|||249.51|Rows containing NAs were excluded from the model.|
+disability_rsa_model_plot|stem|91a2dffdab4667ef|d5d642f6eb5c58c5|dbc7f4e283e42689|-192327919||t19590.6981923564s|17b403df3a49aeaf|1004949077|rds|local|vector|||2.94||
 disability_rsa_models|stem|bff83b9e2004c31f|f7821d2cdc80bb04|634e403842946473|-460455875||t19555.7045166895s|c487fe9e85d102af|169074|rds|local|vector|||0.08||
 disability_rsa_plot|stem|d34824b82ef737f3|aa425320d27208b5|1f866774b30927d1|1769571255||t19555.7079563808s|c852eab37a726e04|78|rds|local|vector|||0.86|1m22mRemoved 8 rows containing nonfinite values stat_smooth.. 1m22mRemoved 8 rows containing missing values geom_point.|
 disability_rsa_predicted_values|stem|276e216e9e99e469|5e855706931b20ec|81a66c0edcf588fe|1205336047||t19555.7045312513s|6603994180d8c7dd|2832|rds|local|vector|||0.47||
 disability_rsa_summaries|stem|03e49e85682365dc|ebe3dd560610dd31|3d4a32a78f69fb84|1730424885||t19555.7045256842s|ee9a0e162d6de709|174367|rds|local|vector|||0.03||
+disability_velocity_model|stem|3b6563830ce62756|039451ffe980a6bc|b3bb8d828616a99d|929444976||t19590.6912960361s|5b50fadcf183cffc|53137263|rds|local|vector|||123.06||
+disability_velocity_model_plot|stem|ba43fa29dae5af10|56cb673057e0313b|82259bf3339e9a9b|-1752260649||t19590.6986438846s|dbd56c86ff21a3e4|177907303|rds|local|vector|||0.51||
+fit_classif_acceleration_model|function|fa2b0a2cee0a33f8|||||||||||||||
+fit_classif_rsa_model|function|31b628ca3364ea25|||||||||||||||
 fit_classif_rsa_models|function|354d864794e63cad|||||||||||||||
+fit_classif_velocity_model|function|ffba291045916f6a|||||||||||||||
+fit_disability_acceleration_model|function|5a5a161119543c9c|||||||||||||||
+fit_disability_rsa_model|function|7042a61a354a5be2|||||||||||||||
 fit_disability_rsa_models|function|80f6fa222069e7c7|||||||||||||||
+fit_disability_velocity_model|function|79eebffd8ea741fd|||||||||||||||
+get_acceleration_data|function|01c6fccffb8b1350|||||||||||||||
 get_classif_rsa_predicted_values|function|e70991f1a4df267f|||||||||||||||
 get_classif_rsa_summaries|function|b85a41aa0bda2325|||||||||||||||
 get_disability_rsa_predicted_values|function|8bbccea00b261873|||||||||||||||
 get_disability_rsa_summaries|function|b85a41aa0bda2325|||||||||||||||
 get_rsa_data|function|5cf4bf2be897422f|||||||||||||||
 get_rsa_summaries|function|b85a41aa0bda2325|||||||||||||||
-get_sprint_data|function|b8f1b22de8c0bcc1|||||||||||||||
+get_sprint_data|function|cdea1c3d1cf6b078|||||||||||||||
+get_tidy_model|function|90abdc3bf63838c4|||||||||||||||
+get_velocity_data|function|67645432d8141dc0|||||||||||||||
+ind_classif_acceleration_plot|stem|46bcdea5cf14ad84|f459f4edcbb583b8|57ceebd69d988a96|-1940483614||t19590.6949614467s|fe3a3d5372692a90|81062|rds|local|vector|||0.03||
+ind_classif_acceleration_plot_tiff|stem|d7d1dbff426f5a23|7fb8860685091658|a78f75687b8fcdcb|82138677||t19590.699893873s|e961a0bcff3caad6|91|rds|local|vector|||0.12||
+ind_classif_plot|stem|fcd32cd6a8580a84|ff44f66f7d8ab51a|8badc6ea8f45c457|-1603100715||t19590.4692456849s|17758adfdc105a0a|164215|rds|local|vector|||0.11||
+ind_classif_rsa_plot|stem|fcd32cd6a8580a84|ff44f66f7d8ab51a|8badc6ea8f45c457|113659205||t19590.5384563892s|17758adfdc105a0a|164215|rds|local|vector|||0.05||
+ind_classif_rsa_plot_tiff|stem|d23567d6578d408f|a646ba516acf3bb9|d683d7507b348d2b|-1329600764||t19590.5507407082s|0b52c5847220add9|82|rds|local|vector|||0.44|1m22mRemoved 8 rows containing nonfinite values stat_smooth.. 1m22mRemoved 8 rows containing missing values geom_point.|
+ind_classif_velocity_plot|stem|e6363886c452fab1|dc79b81dc7b00a38|92f6b60bfec686e5|758729656||t19590.6949625891s|dcc52be331ac90a5|128028|rds|local|vector|||0.03||
+ind_classif_velocity_plot_tiff|stem|6e5b6cdecc6e14bb|1d06c412def02423|ad72c453a8feb92b|1809801745||t19590.6998956454s|e7d9c43b1c994be3|87|rds|local|vector|||0.14||
+ind_disability_acceleration_plot|stem|f657fe1aff1d72d7|fcf630578eef4c35|7ba3b11d75c35ea8|848275137||t19590.6938250722s|95237fe17deda865|81065|rds|local|vector|||0.08|1m22mUsing size aesthetic for lines was deprecated in ggplot2 3.4.0.36mℹ39m Please use linewidth instead.|
+ind_disability_acceleration_plot_tiff|stem|7220d5903dc60ba3|21588afb4e25f879|96542449d67be944|1927256815||t19590.6995330431s|9903306e1685fb67|94|rds|local|vector|||0.97||
+ind_disability_plot|stem|e5c8d42871bbcaaa|750f897d74296fc3|4027ebf320699533|-1369549523||t19590.4692434607s|fa12f73a9390f74f|164217|rds|local|vector|||0.09|1m22mUsing size aesthetic for lines was deprecated in ggplot2 3.4.0.36mℹ39m Please use linewidth instead.|
+ind_disability_plot_tiff|stem|2d866bf3e0348d44|0bf7de7b1e65c43e|31d77fe16975cb6a|-903893738||t19590.4692549875s|e655bbbdcbba1d63|81|rds|local|vector|||0.78|1m22mRemoved 8 rows containing nonfinite values stat_smooth.. 1m22mRemoved 8 rows containing missing values geom_point.|
+ind_disability_rsa_plot|stem|e5c8d42871bbcaaa|750f897d74296fc3|4027ebf320699533|-1646625844||t19590.5384550124s|fa12f73a9390f74f|164217|rds|local|vector|||0.14|1m22mUsing size aesthetic for lines was deprecated in ggplot2 3.4.0.36mℹ39m Please use linewidth instead.|
+ind_disability_rsa_plot_tiff|stem|e500735d14462abf|85d176db8c0b9ae8|0187e90e1d47360b|-372271181||t19590.5507355432s|0e696b453c03de61|85|rds|local|vector|||0.63|1m22mRemoved 8 rows containing nonfinite values stat_smooth.. 1m22mRemoved 8 rows containing missing values geom_point.|
+ind_disability_velocity_plot|stem|20fc3efb461671f7|dad2e097fe02288d|e4ac2614ede53627|-920390380||t19590.6949606642s|7cfb3e1ebf13358e|128030|rds|local|vector|||0.05||
+ind_disability_velocity_plot_tiff|stem|5609126a2065db57|34fb10ff8709286d|fd01d227822634e7|1426320602||t19590.6998922434s|bb4e721372eac6a0|88|rds|local|vector|||0.12||
+make_classif_acceleration_model_plot|function|513759f198b7d2ac|||||||||||||||
+make_classif_rsa_model_plot|function|228a777652775d92|||||||||||||||
 make_classif_rsa_plot|function|9096bf18e56e8f2a|||||||||||||||
+make_classif_velocity_model_plot|function|5d1a1987cede0332|||||||||||||||
+make_disability_acceleration_model_plot|function|08271a6eccfe20cf|||||||||||||||
+make_disability_rsa_model_plot|function|7a7d005090b80ba5|||||||||||||||
 make_disability_rsa_plot|function|3c3a90d6f2cee103|||||||||||||||
+make_disability_velocity_model_plot|function|2ad7920887daf702|||||||||||||||
+make_ind_classif_acceleration_plot|function|d500f34ba088c414|||||||||||||||
+make_ind_classif_rsa_plot|function|dd31b0180015e0f7|||||||||||||||
+make_ind_classif_velocity_plot|function|351498e2b92c5474|||||||||||||||
+make_ind_disability_acceleration_plot|function|728b4f45ade3ded4|||||||||||||||
+make_ind_disability_rsa_plot|function|27e4a21c5e308d9f|||||||||||||||
+make_ind_disability_velocity_plot|function|fce5d2fbe61861c2|||||||||||||||
+make_plot_tiff|function|aa119d7b32859d99|||||||||||||||
+make_pp_check|function|4e9a019b6b971b97|||||||||||||||
+make_rhat_plot|function|f5e05c1a0e7b1f69|||||||||||||||
+make_trace_plots|function|075cfc5cd8fead27|||||||||||||||
+pp_check_classif_acceleration_model|stem|2ca289b170f68c8d|edde7f217699ba81|afc860a909bc53e4|1279104487||t19590.699740798s|d7b3ff0407b85dd1|127179|rds|local|vector|||0.37||
+pp_check_classif_rsa_model|stem|4c98cc7b088f0d94|2d28f9c2a2e679d2|10fd60f2fce3ad78|-361441412||t19590.6967021762s|341c452ed468092f|241788|rds|local|vector|||0.62||
+pp_check_classif_velocity_model|stem|f94dc6edff19406d|35e380ab33069e36|3e3f8a8b98fe2731|603570549||t19590.6995192055s|bbd81863b5ad1613|126698|rds|local|vector|||0.36||
+pp_check_disability_acceleration_model|stem|9e1676c597cf9fc1|364bdf6ebef0b3eb|c0930474125ac487|79710378||t19590.6991518276s|64aafaff9f15b10d|127168|rds|local|vector|||0.42||
+pp_check_disability_rsa_model|stem|1c05c65fa9782012|e6402abbd71f4f39|6813fd11155dab6d|1357168719||t19590.6967092752s|2019a834cffde476|241887|rds|local|vector|||0.56||
+pp_check_disability_velocity_model|stem|2dbbdb59601f7ac4|3a179bfe90794683|1b4b60d66bc1e50a|1891378691||t19590.6984297613s|f5edb5ebe3c31f22|126721|rds|local|vector|||0.36||
+rhat_plot_classif_acceleration_model|stem|e38a966060fb12c0|d7e98aad69cb7043|72c6853d839ecac9|-198332388||t19590.6997886333s|0a4192e343abbfaf|53509594|rds|local|vector|||1.35||
+rhat_plot_classif_rsa_model|stem|f235b614b4b43f0b|0ecc2b190be486b8|b5bfeaceb53596fd|2087419552||t19590.6966937289s|d1a439572c87b168|57803162|rds|local|vector|||1.03||
+rhat_plot_classif_velocity_model|stem|53d52deb1319185f|911c34d82172ba7c|2e9bce419bee296a|1732897968||t19590.6992981245s|d938e8f5958b3e13|53333641|rds|local|vector|||0.92||
+rhat_plot_disability_acceleration_model|stem|227277b1795bf951|4bd2d4c1694e5e32|1053ad004cb58d7a|583029167||t19590.6991457821s|0df121c570ecf3ac|53487636|rds|local|vector|||0.93||
+rhat_plot_disability_rsa_model|stem|6521f4df0e4a34c2|3da82d0efa76f8eb|7b132c4c90810a51|-918597162||t19590.698247792s|1c63081342f14080|57793680|rds|local|vector|||1.06||
+rhat_plot_disability_velocity_model|stem|c57b48131a36542c|bc03d5c8ee90cd7d|62ebf35001db1d25|388148286||t19590.6987965811s|8c213f88e270ca3a|53383040|rds|local|vector|||0.93||
 rsa_data|stem|dcd0d580208cdd2d|354039efa39029a6|c1fa3c3b450327f2|1900170596||t19555.7045126726s|e2b8b545a6c016f2|2677|rds|local|vector|||0.14||
 rsa_file|stem|4e7d486a356ea208|14bb5ce10636875d|ef46db3751d8e999|1833299739|rsa_data.csv|t19555.7017732549s|7dd5db65d3e5c882|7408|file|local|vector|||1.44|package tidyverse was built under R version 4.2.3. package ggplot2 was built under R version 4.2.3. package tibble was built under R version 4.2.3. package tidyr was built under R version 4.2.3. package readr was built under R version 4.2.3. package purrr was built under R version 4.2.3. package dplyr was built under R version 4.2.3. package forcats was built under R version 4.2.3. package lubridate was built under R version 4.2.3|
-sprint_data|stem|022acab0992fa257|7c9558faf77414e7|5a7de9b194490b9c|259950124||t19555.6208908515s|027896825eb20320|3473|rds|local|vector|||0.01||
-sprint_file|stem|56edf01e85b3aaff|ba8c69ee8dc2109c|ef46db3751d8e999|1466868339|sprint_data.csv|t19555.5762128364s|512d7d0c9103ff5d|9679|file|local|vector|||1.41|package tidyverse was built under R version 4.2.3. package ggplot2 was built under R version 4.2.3. package tibble was built under R version 4.2.3. package tidyr was built under R version 4.2.3. package readr was built under R version 4.2.3. package purrr was built under R version 4.2.3. package dplyr was built under R version 4.2.3. package forcats was built under R version 4.2.3. package lubridate was built under R version 4.2.3|
+sprint_data|stem|7ed91f02bc1fd928|7c9558faf77414e7|52c04da96c8bbe08|259950124||t19590.5921551548s|63ff38988a3ac6d5|1603|rds|local|vector|||0.08||
+sprint_file|stem|7bb9b2c9a0acce65|ba8c69ee8dc2109c|ef46db3751d8e999|1466868339|sprint_data.csv|t19589.9089283337s|7adf95497078ee3c|9098|file|local|vector|||3.1|package ggplot2 was built under R version 4.2.3. package tibble was built under R version 4.2.3. package tidyr was built under R version 4.2.3. package readr was built under R version 4.2.3. package purrr was built under R version 4.2.3. package stringr was built under R version 4.2.3. package forcats was built under R version 4.2.3. package lubridate was built under R version 4.2.3. package rstan was built under R version 4.2.3. package StanHeaders was built under R version 4.2.3|
+tidy_classif_acceleration_model|stem|38e8f9bcb2d58b57|c246923a51ea96ed|ee557dd6445ddfa2|840580510||t19590.69974327s|0b575e4744178968|1201|rds|local|vector|||0.21||
+tidy_classif_rsa_model|stem|863417ac91fc1ace|29dfb547eb52a02f|33188c9cc1762efa|198713756||t19590.6951430258s|a373de493c11e097|1727|rds|local|vector|||0.15|some parameter names contain underscores term naming may be unreliable|
+tidy_classif_velocity_model|stem|355c5613d0abe9ca|b8f2e83537a9c5b6|b731de003a887bab|814237825||t19590.6995217525s|0b575e4744178968|1201|rds|local|vector|||0.21||
+tidy_disability_acceleration_model|stem|80069c91deea0cb8|2ff0f2849e57b66e|51702761365f4150|318962131||t19590.698799927s|e2a93af4f48d8bc5|1204|rds|local|vector|||0.22||
+tidy_disability_rsa_model|stem|fb35ba8c3980af38|29535bcb18c0351e|84e67f7c771bf907|-391530331||t19590.6984249975s|5f966c76febcd3b1|1742|rds|local|vector|||0.13|some parameter names contain underscores term naming may be unreliable|
+tidy_disability_velocity_model|stem|5b67aa51e7cff824|56b0f755a4471906|7a2691997b52da17|1779718504||t19590.6986482532s|83add963c557b44f|1207|rds|local|vector|||0.19||
+trace_plot_classif_acceleration_model|stem|f6ddfb468d5cbae1|0f450945f754a912|d351b934989317b3|-528267873||t19590.6998902391s|4ab63850c1a3ab87|26626262|rds|local|vector|||6.7||
+trace_plot_classif_rsa_model|stem|9e8a625977d42ceb|717f4b6eaab48e51|9f0234e3bb12a15a|-1444454969||t19590.6951404772s|12eeb7a350ef24cb|44864668|rds|local|vector|||11.91||
+trace_plot_classif_velocity_model|stem|c359fe92e509be1d|68c6919a44350c7c|6f6a727aa236aa7d|-987572029||t19590.6992563523s|261c79c4a70e0a31|26502109|rds|local|vector|||6.89||
+trace_plot_disability_acceleration_model|stem|4abf98bd4f6be4c6|37fab823a4fe215a|b38d846f5900c2f3|489116073||t19590.6991044916s|4d2bb186416b9dcd|26601092|rds|local|vector|||6.67||
+trace_plot_disability_rsa_model|stem|3c727326b665aa27|aa57647eb8a24ca5|61b6a42f91e4fe98|-1848095050||t19590.6984228455s|8f3d5ecf90a8e6d1|44809040|rds|local|vector|||11.61||
+trace_plot_disability_velocity_model|stem|ed420b172b69b256|a01ff5979f2e79d9|28c0ce13ef912f90|2077175807||t19590.6987547171s|4cfce0b0babdb52e|26506432|rds|local|vector|||7.08||
+velocity_data|stem|bc19a929bef4deed|c4c343002513c081|8713a1294193b9c4|-15567391||t19590.5772076758s|4ff05336d644dae2|106|rds|local|vector|||0.02||

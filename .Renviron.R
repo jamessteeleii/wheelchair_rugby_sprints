@@ -1,0 +1,1 @@
+Sys.setenv(RENV_PATHS_RTOOLS = "C:/rtools42")
