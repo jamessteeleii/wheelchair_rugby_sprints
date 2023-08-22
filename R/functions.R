@@ -2,12 +2,20 @@
 
 # Get the repeated sprint trial data
 get_rsa_data <- function(file) {
-  read.csv(file, fileEncoding = 'UTF-8-BOM') %>%
+  data <- read.csv(file, fileEncoding = 'UTF-8-BOM') %>%
     mutate_if(is.character,as.factor) %>%
     pivot_longer(c("x5_m", "x10_m", "x15_m", "x20_m"), names_to = "distance", values_to = "time") %>%
     rename(disability = "sci")  %>%
     mutate(distance = factor(str_remove_all(distance,"x|_"), levels = c("5m", "10m", "15m", "20m")),
            classif = as.factor(classif))
+
+  data$distance <- recode(data$distance,
+                                   "5m" = "0-5m",
+                                   "10m" = "5-10m",
+                                   "15m" = "10-15m",
+                                   "20m" = "15-20m")
+
+  data
 }
 
 # Make individual data plots
@@ -20,7 +28,7 @@ make_ind_disability_rsa_plot <- function(data) {
     geom_point(aes(y=time), size=1, alpha=0.25) +
     labs(x="Sprint Number",
          y="Time (seconds)",
-         title = "Individual Data and Smooths",
+         subtitle = "Individual Data and Smooths",
          color = "Disability") +
     guides(fill = "none",
            color = "none") +
@@ -40,7 +48,7 @@ make_ind_classif_rsa_plot <- function(data) {
     geom_point(aes(y=time), size=1, alpha=0.25) +
     labs(x="Sprint Number",
          y="Time (seconds)",
-         title = "Individual Data and Smooths",
+         subtitle = "Individual Data and Smooths",
          color = "Classification") +
     guides(fill = "none",
            color = "none") +
@@ -101,7 +109,6 @@ make_disability_rsa_model_plot <- function(data, model) {
     scale_y_continuous(breaks = c(2,3,4,5,6,7,8)) +
     facet_grid(.~distance) +
     labs(
-      title = "Expectation of the Posterior Predictive Distribution",
       subtitle = "Global grand mean and 95% credible interval (CI)",
       x="Sprint Number",
       y="Time (seconds)",
@@ -126,7 +133,6 @@ make_classif_rsa_model_plot <- function(data, model) {
     scale_y_continuous(breaks = c(2,3,4,5,6,7,8)) +
     facet_grid(.~distance) +
     labs(
-      title = "Expectation of the Posterior Predictive Distribution",
       subtitle = "Global grand mean and 95% credible interval (CI)",
       x="Sprint Number",
       y="Time (seconds)",
@@ -182,7 +188,7 @@ make_ind_disability_velocity_plot <- function(data) {
     geom_point(aes(y=velocity), size=1, alpha=0.25) +
     labs(x="Distance",
          y=bquote("Velocity (m\U00B7"*"s"^-1*")"),
-         title = "Individual Data") +
+         subtitle = "Individual Data") +
     guides(fill = "none",
            color = "none") +
     scale_fill_brewer(palette = "Set2") +
@@ -198,7 +204,7 @@ make_ind_classif_velocity_plot <- function(data) {
     geom_point(aes(y=velocity), size=1, alpha=0.25) +
     labs(x="Distance",
          y=bquote("Velocity (m\U00B7"*"s"^-1*")"),
-         title = "Individual Data") +
+         subtitle = "Individual Data") +
     guides(fill = "none",
            color = "none") +
     scale_fill_brewer(palette = "Set2") +
@@ -254,7 +260,6 @@ make_disability_velocity_model_plot <- function(data, model) {
     scale_fill_brewer(palette = "Set2") +
     scale_color_brewer(palette = "Dark2") +
     labs(
-      title = "Expectation of the Posterior Predictive Distribution",
       subtitle = "Global grand mean and 95% credible interval (CI)",
       x="Sprint Number",
       y=bquote("Velocity (m\U00B7"*"s"^-1*")"),
@@ -276,7 +281,6 @@ make_classif_velocity_model_plot <- function(data, model) {
     scale_fill_brewer(palette = "Set2") +
     scale_color_brewer(palette = "Dark2") +
     labs(
-      title = "Expectation of the Posterior Predictive Distribution",
       subtitle = "Global grand mean and 95% credible interval (CI)",
       x="Sprint Number",
       y=bquote("Velocity (m\U00B7"*"s"^-1*")"),
@@ -296,7 +300,7 @@ make_ind_disability_acceleration_plot <- function(data) {
     geom_point(aes(y=acceleration), size=1, alpha=0.25) +
     labs(x="Distance",
          y=bquote("Acceleration (m\U00B7"*"s"^-1*")"),
-         title = "Individual Data") +
+         subtitle = "Individual Data") +
     guides(fill = "none",
            color = "none") +
     scale_fill_brewer(palette = "Set2") +
@@ -311,7 +315,7 @@ make_ind_classif_acceleration_plot <- function(data) {
     geom_point(aes(y=acceleration), size=1, alpha=0.25) +
     labs(x="Distance",
          y=bquote("Acceleration (m\U00B7"*"s"^-1*")"),
-         title = "Individual Data") +
+         subtitle = "Individual Data") +
     guides(fill = "none",
            color = "none") +
     scale_fill_brewer(palette = "Set2") +
@@ -366,7 +370,6 @@ make_disability_acceleration_model_plot <- function(data, model) {
     scale_fill_brewer(palette = "Set2") +
     scale_color_brewer(palette = "Dark2") +
     labs(
-      title = "Expectation of the Posterior Predictive Distribution",
       subtitle = "Global grand mean and 95% credible interval (CI)",
       x="Sprint Number",
       y=bquote("Acceleration (m\U00B7"*"s"^-1*")"),
@@ -388,7 +391,6 @@ make_classif_acceleration_model_plot <- function(data, model) {
     scale_fill_brewer(palette = "Set2") +
     scale_color_brewer(palette = "Dark2") +
     labs(
-      title = "Expectation of the Posterior Predictive Distribution",
       subtitle = "Global grand mean and 95% credible interval (CI)",
       x="Sprint Number",
       y=bquote("Acceleration (m\U00B7"*"s"^-1*")"),
@@ -425,13 +427,27 @@ make_pp_check <- function(model) {
 
 # Plotting
 
-combine_plots <- function(plot1, plot2, title, caption) {
-  (plot1 / plot2) +
-      plot_annotation(title = title,
-                      caption = caption) &
-    theme(legend.position = 'bottom')
+combine_plots <- function(plot1, plot2, plot3, plot4, title1, title2, caption1, caption2) {
+  p1 <- (plot1 / plot2) +
+  plot_layout(guides = "collect") +
+    plot_annotation(title = title1,
+                      caption = caption1,
+                      tag_level = "A",
+                      tag_prefix = "(", tag_suffix = ")") &
+    theme(plot.title = element_text(hjust = 0.5, face = "bold"), legend.position = 'bottom')
+
+  p2 <- (plot3 / plot4) +
+    plot_layout(guides = "collect") +
+    plot_annotation(title = title2,
+                    caption = caption2,
+                    tag_level = list(c("(C)", "(D)"))) &
+    theme(plot.title = element_text(hjust = 0.5, face = "bold"), legend.position = 'bottom')
+
+  plot <- wrap_elements(p1) | wrap_elements(p2)
 
 }
+
+
 
 make_plot_tiff <- function(plot, path, width, height, device, dpi) {
 

@@ -94,71 +94,44 @@ list(
   tar_target(classif_acceleration_model_plot, make_classif_acceleration_model_plot(sprint_data, classif_acceleration_model)),
 
   ##### Combine and save plots as tiffs
-  # Disability RSA
-  tar_target(ind_disability_rsa_plot_tiff, make_plot_tiff(ind_disability_rsa_plot, "plots/ind_disability_rsa_plot.tiff",
-                                                      width=7.5, height=7.5, device="tiff", dpi=300)),
 
-  tar_target(combined_disability_rsa_plot, combine_plots(ind_disability_rsa_plot, disability_rsa_model_plot,
-                                                     "Disability - Repeated Sprints",
-                                                     "Model: Time ~ Disability * Sprint Number * Distance + (Sprint Number * Distance | ID)")),
+  ### Repeated sprint ability
+  tar_target(combined_rsa_plot, combine_plots(ind_disability_rsa_plot, disability_rsa_model_plot,
+                                              ind_classif_rsa_plot, classif_rsa_model_plot,
+                                             "Disability - Repeated Sprints",
+                                             "Classification - Repeated Sprints",
+                                             "Model: Time ~ Disability * Sprint Number * Distance + (Sprint Number + Distance | ID)",
+                                             "Model: Time ~ Classification * Sprint Number * Distance + (Sprint Number + Distance | ID)")),
 
-  tar_target(combined_disability_rsa_plot_tiff, make_plot_tiff(combined_disability_rsa_plot, "plots/combined_disability_rsa_plot.tiff",
-                                                      width=7.5, height=7.5, device="tiff", dpi=300)),
 
-  # Classification RSA
-  tar_target(ind_classif_rsa_plot_tiff, make_plot_tiff(ind_classif_rsa_plot, "plots/ind_classif_rsa_plot.tiff",
-                                                          width=7.5, height=7.5, device="tiff", dpi=300)),
+  tar_target(combined_rsa_plot_tiff, make_plot_tiff(combined_rsa_plot, "plots/combined_rsa_plot.tiff",
+                                                   width=15, height=7.5, device="tiff", dpi=300)),
 
-  tar_target(combined_classif_rsa_plot, combine_plots(ind_classif_rsa_plot, classif_rsa_model_plot,
-                                                         "Classification - Repeated Sprints",
-                                                      "Model: Time ~ Classification * Sprint Number * Distance + (Sprint Number * Distance | ID)")),
+  ### Velocity
 
-  tar_target(combined_classif_rsa_plot_tiff, make_plot_tiff(combined_classif_rsa_plot, "plots/combined_classif_rsa_plot.tiff",
-                                                               width=7.5, height=7.5, device="tiff", dpi=300)),
+  tar_target(combined_velocity_plot, combine_plots(ind_disability_velocity_plot, disability_velocity_model_plot,
+                                              ind_classif_velocity_plot, classif_velocity_model_plot,
+                                              "Disability - Velocity",
+                                              "Classification - Velocity",
+                                              "Model: Time ~ Disability * Distance + (Distance | ID)",
+                                              "Model: Time ~ Classification * Distance + (Distance | ID)")),
 
-  # Disability velocity
-  tar_target(ind_disability_velocity_plot_tiff, make_plot_tiff(ind_disability_velocity_plot, "plots/ind_disability_velocity_plot.tiff",
-                                                          width=7.5, height=7.5, device="tiff", dpi=300)),
 
-  tar_target(combined_disability_velocity_plot, combine_plots(ind_disability_velocity_plot, disability_velocity_model_plot,
-                                                         "Disability - Sprint Velocity",
-                                                         "Model: Velocity ~ Disability * Distance + (Distance | ID)")),
+  tar_target(combined_velocity_plot_tiff, make_plot_tiff(combined_velocity_plot, "plots/combined_velocity_plot.tiff",
+                                                    width=15, height=7.5, device="tiff", dpi=300)),
 
-  tar_target(combined_disability_velocity_plot_tiff, make_plot_tiff(combined_disability_velocity_plot, "plots/combined_disability_velocity_plot.tiff",
-                                                               width=7.5, height=7.5, device="tiff", dpi=300)),
+  # # Acceleration
 
-  # Classification velocity
-  tar_target(ind_classif_velocity_plot_tiff, make_plot_tiff(ind_classif_velocity_plot, "plots/ind_classif_velocity_plot.tiff",
-                                                               width=7.5, height=7.5, device="tiff", dpi=300)),
+  tar_target(combined_acceleration_plot, combine_plots(ind_disability_acceleration_plot, disability_acceleration_model_plot,
+                                                   ind_classif_acceleration_plot, classif_acceleration_model_plot,
+                                                   "Disability - Acceleration",
+                                                   "Classification - Acceleration",
+                                                   "Model: Time ~ Disability * Distance + (Distance | ID)",
+                                                   "Model: Time ~ Classification * Distance + (Distance | ID)")),
 
-  tar_target(combined_classif_velocity_plot, combine_plots(ind_classif_velocity_plot, classif_velocity_model_plot,
-                                                           "Classification - Sprint Velocity",
-                                                           "Model: Velocity ~ Classification * Distance + (Distance | ID)")),
 
-  tar_target(combined_classif_velocity_plot_tiff, make_plot_tiff(combined_classif_velocity_plot, "plots/combined_classif_velocity_plot.tiff",
-                                                                    width=7.5, height=7.5, device="tiff", dpi=300)),
-
-  # Disability acceleration
-  tar_target(ind_disability_acceleration_plot_tiff, make_plot_tiff(ind_disability_acceleration_plot, "plots/ind_disability_acceleration_plot.tiff",
-                                                               width=7.5, height=7.5, device="tiff", dpi=300)),
-
-  tar_target(combined_disability_acceleration_plot, combine_plots(ind_disability_acceleration_plot, disability_acceleration_model_plot,
-                                                                  "Disability - Sprint Acceleration",
-                                                                  "Model: Acceleration ~ Disability * Distance + (Distance | ID)")),
-
-  tar_target(combined_disability_acceleration_plot_tiff, make_plot_tiff(combined_disability_acceleration_plot, "plots/combined_disability_acceleration_plot.tiff",
-                                                                    width=7.5, height=7.5, device="tiff", dpi=300)),
-
-  # Classification acceleration
-  tar_target(ind_classif_acceleration_plot_tiff, make_plot_tiff(ind_classif_acceleration_plot, "plots/ind_classif_acceleration_plot.tiff",
-                                                            width=7.5, height=7.5, device="tiff", dpi=300)),
-
-  tar_target(combined_classif_acceleration_plot, combine_plots(ind_classif_acceleration_plot, classif_acceleration_model_plot,
-                                                               "Classification - Sprint Acceleration",
-                                                               "Model: Acceleration ~ Classification * Distance + (Distance | ID)")),
-
-  tar_target(combined_classif_acceleration_plot_tiff, make_plot_tiff(combined_classif_acceleration_plot, "plots/combined_classif_acceleration_plot.tiff",
-                                                                 width=7.5, height=7.5, device="tiff", dpi=300)),
+  tar_target(combined_acceleration_plot_tiff, make_plot_tiff(combined_acceleration_plot, "plots/combined_acceleration_plot.tiff",
+                                                         width=15, height=7.5, device="tiff", dpi=300)),
 
   ##### Reporting
   # Render the report

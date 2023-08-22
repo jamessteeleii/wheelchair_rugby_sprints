@@ -1040,6 +1040,21 @@
       ],
       "Hash": "c76ee8fe60939384b9726128e38caea0"
     },
+    "ggtext": {
+      "Package": "ggtext",
+      "Version": "0.1.2",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "R",
+        "ggplot2",
+        "grid",
+        "gridtext",
+        "rlang",
+        "scales"
+      ],
+      "Hash": "c5ba8f5056487403a299b91984be86ca"
+    },
     "globals": {
       "Package": "globals",
       "Version": "0.16.2",
@@ -1126,6 +1141,26 @@
         "utils"
       ],
       "Hash": "7d7f283939f563670a697165b2cf5560"
+    },
+    "gridtext": {
+      "Package": "gridtext",
+      "Version": "0.1.5",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "R",
+        "Rcpp",
+        "curl",
+        "grDevices",
+        "grid",
+        "jpeg",
+        "markdown",
+        "png",
+        "rlang",
+        "stringr",
+        "xml2"
+      ],
+      "Hash": "05e4f5fffb1eecfeaac9ea0b7f255fef"
     },
     "gtable": {
       "Package": "gtable",
@@ -1321,6 +1356,16 @@
         "utils"
       ],
       "Hash": "0080607b4a1a7b28979aecef976d8bc2"
+    },
+    "jpeg": {
+      "Package": "jpeg",
+      "Version": "0.1-10",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "R"
+      ],
+      "Hash": "031a0b683d001a7519202f0628fc0358"
     },
     "jquerylib": {
       "Package": "jquerylib",
@@ -1843,6 +1888,16 @@
         "Rcpp"
       ],
       "Hash": "d744387aef9047b0b48be2933d78e862"
+    },
+    "png": {
+      "Package": "png",
+      "Version": "0.1-8",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "R"
+      ],
+      "Hash": "bd54ba8a0a5faded999a7aab6e46b374"
     },
     "posterior": {
       "Package": "posterior",
@@ -2827,14 +2882,14 @@
     },
     "xfun": {
       "Package": "xfun",
-      "Version": "0.36",
+      "Version": "0.40",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Requirements": [
         "stats",
         "tools"
       ],
-      "Hash": "f5baec54606751aa53ac9c0e05848ed6"
+      "Hash": "be07d23211245fc7d4209f54c4e4ffc8"
     },
     "xml2": {
       "Package": "xml2",

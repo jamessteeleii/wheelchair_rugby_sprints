@@ -10,125 +10,229 @@ bibliography: references.bib
 csl: apa.csl
 ---
 
-```{r setup, include=FALSE}
+```{r} 
+#| message: false
+#| warning: false
+#| echo: false
+#| include: false
+
+
 knitr::opts_chunk$set(echo = TRUE, fig.align="center")
 options(knitr.kable.NA = '')
 
 library(tidyverse)
 library(kableExtra)
+library(ggtext)
 library(patchwork)
 
 ```
 
 # Statistical Analysis
 
-The present analysis was not pre-registered as we had no a priori hypotheses and thus was considered exploratory. Inferential statistics were treated as highly unstable local descriptions of the relations between model assumptions and data in order to acknowledge the inherent uncertainty in drawing generalised inferences from single and small samples [@amrhein_inferential_2019]. For all analyses we opted to avoid dichotomising the existence of effects and therefore did not employ traditional null hypothesis significance testing on parameter estimates [@amrhein_scientists_2019; @mcshane_abandon_2019]. Instead, we opted to take an estimation-based approach instead [@cumming_new_2014], based within a Bayesian framework [@kruschke_bayesian_2018]. For all analyses model parameter estimates and their precision, along with conclusions based upon them, were interpreted continuously and probabilistically, considering data quality, plausibility of effect, and previous literature, all within the context of each model. We focused primarily on qualitative examination of our results based on visualization of the data and models for fixed effects, and exploration of variances using random effects.
+The present analysis was not pre-registered as we had no a priori hypotheses and, given the limited sample size due to resource constraints and the population, thus was considered exploratory. Inferential statistics were treated as highly unstable local descriptions of the relations between model assumptions and data in order to acknowledge the inherent uncertainty in drawing generalised inferences from single and small samples [@amrhein_inferential_2019]. For all analyses we opted to avoid dichotomising the existence of effects and therefore did not employ traditional null hypothesis significance testing on parameter estimates [@amrhein_scientists_2019; @mcshane_abandon_2019]. Instead, we opted to take an estimation-based approach instead [@cumming_new_2014], based within a Bayesian framework [@kruschke_bayesian_2018]. For all analyses model parameter estimates and their precision, along with conclusions based upon them, were interpreted continuously and probabilistically, considering data quality, plausibility of effect, and previous literature, all within the context of each model. We focused primarily on qualitative examination of our results based on visualization of the data and models for fixed effects, and exploration of variances using random effects. All analysis was performed in R (version 4.2.3, The R Foundation for Statistical Computing, 2023) and all data and code is presented in the supplementary materials (https://osf.io/y2jdb/). Two sets of models were employed exploring the sprint trial outcomes, and the repeated sprint outcomes, for both classification (4 vs 5) and disability (other vs SCI). The `brms` package [@burkner_brms_2017] was used to fit all models. All parameters in the models described below had $\hat{R}$ values $\leq{1.01}$, trace plots demonstrated chain convergence, and the posterior predictive checks appeared appropriate (see https://osf.io/juex5). Given population and outcomes explored, the limited data available in past studies, and the model structures, we did not have a clear intuition or informed opinion about what priors to set and so opted to use the default weakly regularising priors and "let the data speak". Four Monte Carlo Markov Chains with 4000 warmup and 4000 sampling iterations were used in each model. For each model results were visualised by taking draws from the expected posterior distribution (n=16000) and taking the mean of these draws along with the 95% quantile (credible) interval for the fixed effects parameters, thus providing the overall grand mean effects for the population. All data visualisations were made using `ggplot2` [@wickham_ggplot2_2022], the `tidybayes` package [@kay_tidybayes_2022], and the `patchwork` package [@pedersen_patchwork_2022].
 
-All analysis was performed in R (version 4.2.3, The R Foundation for Statistical Computing, 2023) and all data and code is presented in the supplementary materials (https://osf.io/32758/). The dependent variable in our model was the perception of assistance provided which we transformed to the $(0,1)$ interval. As such we used beta regression for our model fit using the `brms` package [@burkner_brms_2017]. data was handled in long format with each row corresponding to an observation of a participants rating of the perception of assistance being provided. As such, participants had multiple rows of observations i.e., up to two observations (one for each forced repetition) for them as trainee, and up to two observations for them as spotter. Fixed effects for the actual assistance provided by the spotter (as a percentage of the load lifted by the trainee), the role of the participant for this observation (either the trainee or the spotter), the forced repetition number (either the first or the second repetition), and each of their two way interactions (i.e., actual assistance:role, actual assistance:force repetition, role:forced repetition) were included. We also used a maximal random effect structure for the $\mu$ parameters including random intercepts for participant and all of the aforementioned effects including interactions as random slopes. Given the novel study design and subject matter we did not have a clear intuition or informed opinion about what prior to set and so opted to use the default weakly regularising priors and "let the data speak". Four Monte Carlo Markov Chains with 4000 warmup and 4000 sampling iterations were used in each model. All parameters in the model had $\hat{R}$ values $\leq{1.01}$, trace plots demonstrated chain convergence, and the posterior predictive checks appeared appropriate (see https://osf.io/9s6jq). Model results were visualised by taking draws from the expected posterior distribution (n=4000) and taking the mean of these draws along with the 95% quantile (credible) interval for the fixed effects parameters, thus providing the overall grand mean effects for the population. As we were partly interested in exploring the identity of the relationships between actual assistance provided and perception of assistance provided, yet a nonlinear beta regression model was used in which the model parameters are on the latent logit scale and are not directly interpretable, we used the `marginaleffects` package [@arel-bundock_marginaleffects_2022] and examined posterior draws for the average marginal effects (i.e., the slope) for the overall grand mean effects of fixed effects parameters at different values of actual capacity (0%, 10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90%, 100%) across forced repetition number and role. We examined the conditional effects by taking draws from the expected posterior distribution incorporating both fixed and random effects and their uncertainty taking the mean of these draws along with all levels of quantile (credible) interval in order to examine the heterogeneity in effects. Lastly, we compared the fixed and random effects estimates for each model term and their ratio to determine if effect heterogeneity was meaningful where a rule of thumb of its standard deviation (random effect) being 0.25 or greater than its average (fixed) effect suggests noteworthy heterogeneity [@bolger_causal_2019]. All data visualisations were made using `ggplot2` [@wickham_ggplot2_2022], the `tidybayes` package [@kay_tidybayes_2022], and the `patchwork` package [@pedersen_patchwork_2022]. For interpretation of model estimates and visualisation we rescaled the expected posterior distribution of the $(0,1)$ interval back to the $(0,100)$ percentage scale.
+## Sprint trial outcomes
+
+For the sprint trials we examined both the velocities and accelerations over each of the 5m sections of the 20m sprint as dependent variables in separate models. Data was handled in long format with each row corresponding to an observation of a participants velocity or acceleration in a 5m section for a given trial. For each of velocity and acceleration we fit separate models with fixed effects for either disability or classification, and in each also included a fixed effect for the distance (i.e., section of the 20m sprint trial: 0-5m, 5-10m, 10-15m, 15-20m), in addition to their interaction. We also used included random intercepts for participant and random slopes for distance. The model equation was, where $outcome_{i}$ was $velocity_{i}$ or $acceleration_{i}$, and $group_{diff}$ was either $disability_{SCI}$ or $classification_{5}$, thus:
+
+$$
+\begin{aligned}
+  \operatorname{outcome}_{i}  &\sim N \left(\mu, \sigma^2 \right) \\
+    \mu &=\alpha_{j[i]} + \beta_{1j[i]}(\operatorname{distance}_{\operatorname{5-10m}}) + \beta_{2j[i]}(\operatorname{distance}_{\operatorname{10-15m}}) + \beta_{3j[i]}(\operatorname{distance}_{\operatorname{15-20m}}) \\    
+\left(
+  \begin{array}{c} 
+    \begin{aligned}
+      &\alpha_{j} \\
+      &\beta_{1j} \\
+      &\beta_{2j} \\
+      &\beta_{3j}
+    \end{aligned}
+  \end{array}
+\right)
+  &\sim N \left(
+\left(
+  \begin{array}{c} 
+    \begin{aligned}
+      &\gamma_{0}^{\alpha} + \gamma_{1}^{\alpha}(\operatorname{group}_{\operatorname{diff}}) \\
+      &\gamma^{\beta_{1}}_{0} + \gamma^{\beta_{1}}_{1}(\operatorname{group}_{\operatorname{diff}}) \\
+      &\gamma^{\beta_{2}}_{0} + \gamma^{\beta_{2}}_{1}(\operatorname{group}_{\operatorname{diff}}) \\
+      &\gamma^{\beta_{3}}_{0} + \gamma^{\beta_{3}}_{1}(\operatorname{group}_{\operatorname{diff}})
+    \end{aligned}
+  \end{array}
+\right)
+, 
+\left(
+  \begin{array}{cccc}
+     \sigma^2_{\alpha_{j}} & \rho_{\alpha_{j}\beta_{1j}} & \rho_{\alpha_{j}\beta_{2j}} & \rho_{\alpha_{j}\beta_{3j}} \\ 
+     \rho_{\beta_{1j}\alpha_{j}} & \sigma^2_{\beta_{1j}} & \rho_{\beta_{1j}\beta_{2j}} & \rho_{\beta_{1j}\beta_{3j}} \\ 
+     \rho_{\beta_{2j}\alpha_{j}} & \rho_{\beta_{2j}\beta_{1j}} & \sigma^2_{\beta_{2j}} & \rho_{\beta_{2j}\beta_{3j}} \\ 
+     \rho_{\beta_{3j}\alpha_{j}} & \rho_{\beta_{3j}\beta_{1j}} & \rho_{\beta_{3j}\beta_{2j}} & \sigma^2_{\beta_{3j}}
+  \end{array}
+\right)
+ \right)
+    \text{, for id j = 1,} \dots \text{,J}
+\end{aligned}
+$$
+
+
+## Repeated sprint trial outcomes
+
+For the sprint trials we examined both the time in seconds for each of the 5m sections of the 20m sprint as dependent variables in separate models. Data was handled in long format with each row corresponding to an observation of a participants time for a 5m section for a given sprint number. We fit separate models with fixed effects for either disability or classification, and in each also included a fixed effect for the distance (i.e., section of the 20m sprint trial: 0-5m, 5-10m, 10-15m, 15-20m) and also for the sprint number (from first to tenth), in addition to their interactions. We also used included random intercepts for participant and random slopes for both distance and sprint number. The model equation was, where $group_{diff}$ was either $disability_{SCI}$ or $classification_{5}$, thus:
+
+$$
+\begin{aligned}
+  \operatorname{time}_{i}  &\sim N \left(\mu, \sigma^2 \right) \\
+    \mu &=\alpha_{j[i]} + \beta_{1j[i]}(\operatorname{sprint\_number}) + \beta_{2j[i]}(\operatorname{distance}_{\operatorname{5-10m}}) + \beta_{3j[i]}(\operatorname{distance}_{\operatorname{10-15m}}) + \beta_{4j[i]}(\operatorname{distance}_{\operatorname{15-20m}}) + \beta_{5}(\operatorname{distance}_{\operatorname{5-10m}} \times \operatorname{sprint\_number}) + \beta_{6}(\operatorname{distance}_{\operatorname{10-15m}} \times \operatorname{sprint\_number}) + \beta_{7}(\operatorname{distance}_{\operatorname{15-20m}} \times \operatorname{sprint\_number}) \\    
+\left(
+  \begin{array}{c} 
+    \begin{aligned}
+      &\alpha_{j} \\
+      &\beta_{1j} \\
+      &\beta_{2j} \\
+      &\beta_{3j} \\
+      &\beta_{4j}
+    \end{aligned}
+  \end{array}
+\right)
+  &\sim N \left(
+\left(
+  \begin{array}{c} 
+    \begin{aligned}
+      &\gamma_{0}^{\alpha} + \gamma_{1}^{\alpha}(\operatorname{group}_{\operatorname{diff}}) \\
+      &\gamma^{\beta_{1}}_{0} + \gamma^{\beta_{1}}_{1}(\operatorname{group}_{\operatorname{diff}}) \\
+      &\gamma^{\beta_{2}}_{0} + \gamma^{\beta_{2}}_{1}(\operatorname{group}_{\operatorname{diff}}) + \gamma^{\beta_{2}}_{2}(\operatorname{group}_{\operatorname{diff}} \times \operatorname{sprint\_number}) \\
+      &\gamma^{\beta_{3}}_{0} + \gamma^{\beta_{3}}_{2}(\operatorname{group}_{\operatorname{diff}}) + \gamma^{\beta_{3}}_{1}(\operatorname{group}_{\operatorname{diff}} \times \operatorname{sprint\_number}) \\
+      &\gamma^{\beta_{4}}_{0} + \gamma^{\beta_{4}}_{1}(\operatorname{group}_{\operatorname{diff}}) + \gamma^{\beta_{4}}_{2}(\operatorname{group}_{\operatorname{diff}} \times \operatorname{sprint\_number})
+    \end{aligned}
+  \end{array}
+\right)
+, 
+\left(
+  \begin{array}{ccccc}
+     \sigma^2_{\alpha_{j}} & \rho_{\alpha_{j}\beta_{1j}} & \rho_{\alpha_{j}\beta_{2j}} & \rho_{\alpha_{j}\beta_{3j}} & \rho_{\alpha_{j}\beta_{4j}} \\ 
+     \rho_{\beta_{1j}\alpha_{j}} & \sigma^2_{\beta_{1j}} & \rho_{\beta_{1j}\beta_{2j}} & \rho_{\beta_{1j}\beta_{3j}} & \rho_{\beta_{1j}\beta_{4j}} \\ 
+     \rho_{\beta_{2j}\alpha_{j}} & \rho_{\beta_{2j}\beta_{1j}} & \sigma^2_{\beta_{2j}} & \rho_{\beta_{2j}\beta_{3j}} & \rho_{\beta_{2j}\beta_{4j}} \\ 
+     \rho_{\beta_{3j}\alpha_{j}} & \rho_{\beta_{3j}\beta_{1j}} & \rho_{\beta_{3j}\beta_{2j}} & \sigma^2_{\beta_{3j}} & \rho_{\beta_{3j}\beta_{4j}} \\ 
+     \rho_{\beta_{4j}\alpha_{j}} & \rho_{\beta_{4j}\beta_{1j}} & \rho_{\beta_{4j}\beta_{2j}} & \rho_{\beta_{4j}\beta_{3j}} & \sigma^2_{\beta_{4j}}
+  \end{array}
+\right)
+ \right)
+    \text{, for id j = 1,} \dots \text{,J}
+\end{aligned}
+$$
 
 # Results
+```{r} 
+#| message: false
+#| warning: false
+#| echo: false
 
-## Main Effects
+targets::tar_load(tidy_disability_velocity_model)
+targets::tar_load(tidy_classif_velocity_model)
+targets::tar_load(tidy_disability_acceleration_model)
+targets::tar_load(tidy_classif_acceleration_model)
 
-The overall grand means from the model for the fixed effects (i.e., without including the random effects) can be seen in @fig-model-data-plot across both the first and second forced repetitions, and for both trainee and spotter roles. The marginal effects for each independent variable are shown in @fig-marg-effs-data-plot. The slopes for actual assistance provided were closer to the identity (i.e., a slope of one meaning that a one unit increase in actual assistance provided was related to a one unit increase perception of assistance provided) over the range in which there were most observations available (\~20-40% actual assistance) in forced repetition one and for both trainee and spotter roles. During repetition two there was a tendency in both trainees and spotters for increases in the actual assistance provided to be perceived as a lesser change in assistance (i.e., slopes less than one; panel (A) of @fig-marg-effs-data-plot). Both trainees and spotters tended to perceive the assistance being provided as greater during the first repetition, and also over lower levels of actual assistance (panel (B) of @fig-marg-effs-data-plot). A slight interaction effect of actual assistance provided upon the slope of repetition number can also be seen in panel (B) of @fig-marg-effs-data-plot (i.e., a reversal of the slope sign suggesting at higher actual assistance repetition two was perceived as receiving less assistance). There was little interaction effects of role (panel (C) of @fig-marg-effs-data-plot), but trainees did tend to perceive the assistance being provided by spotters as being greater than it actually was to a greater degree than spotters themselves, at least over lower levels of actual assistance.
+disability_tab <- left_join(tidy_disability_velocity_model, tidy_disability_acceleration_model,
+                          by = c("effect", "term")) %>%
+  select(term, estimate.x, conf.low.x, conf.high.x, estimate.y, conf.low.y, conf.high.y)
 
-```{r fig-model-data-plot, message=FALSE, warning=FALSE, echo=FALSE, fig.height=5, fig.width=10, fig.cap="Global grand means and credible interval estimates from the expectation of the posterior predictive distribution for the relationship of actual assistance provided with perception of assistance provided over both forced repetitions and participant roles. The dashed line across the identity is provided to aid with visual interpretation where strong identity would be indicated where model estimates straddle this line, where they fall below the line it would indicate that perception underestimates actual assistance provided, and vice versa where they fall above the line."}
+classif_tab <- left_join(tidy_classif_velocity_model, tidy_classif_acceleration_model,
+                            by = c("effect", "term")) %>%
+  select(term, estimate.x, conf.low.x, conf.high.x, estimate.y, conf.low.y, conf.high.y)
 
-targets::tar_load(model_data_plot)
 
-model_data_plot
-
-```
-
-```{r fig-marg-effs-data-plot, message=FALSE, warning=FALSE, echo=FALSE, fig.height=15, fig.width=10, fig.cap="Average marginal effect estimates (i.e., slopes) from expectations of the posterior predictive distributions for (A) the relationship actual assistance provided with perception of assistance provided over both forced repetitions and participant roles, (B) the effect of forced repetition number over both actual assistance provided and participant role, and (C) the effect of participant role over actual assistance provided and forced repetition number. For panel (A) the dashed line indicates a slope value of one for actual assistance provided and perception of assistance provided, where a value of one indicates strong identity i.e., a one to one change in the magnitude of perception for a change in the magnitude of actual assistance provided. In both other panels the dashed line indicates a value of zero."}
-
-targets::tar_load(marg_effs_act_assist_plot)
-targets::tar_load(marg_effs_role_plot)
-targets::tar_load(marg_effs_rep_plot)
-  
-
-(marg_effs_act_assist_plot / marg_effs_rep_plot / marg_effs_role_plot) +
-  plot_annotation(tag_level = "A",
-                  tag_prefix = "(", tag_suffix = ")")
-
-```
-
-# Heterogeneity of effects
-
-Despite these qualitative trends in our modeled results, there was evidently considerable variance in effects between participants. @fig-individual-data-plot shows the individual data for each participant, and @fig-cond-effs-data-plot shows the conditional effects from the expected posterior distribution (i.e., including the fixed and random effects and their uncertainty). With the exception of spotter at low levels of actual assistance provided, the variance in predicted effects covered almost the entire range of the dependent variable (i.e., perception of assistance provided; 0-100%) suggesting all effects to be quite heterogeneous. @tbl-random-effs-tab shows that all model terms, with the exception of the intercept and actual assistance provided, showed noteworthy heterogeneity (i.e., ratio of standard deviation to mean estimate $\leq{0.25}$)
-
-```{r fig-individual-data-plot, message=FALSE, warning=FALSE, echo=FALSE, fig.height=10, fig.width=10, fig.cap="Individual data plot. Each panel shows the raw data for an individual participant."}
-
-targets::tar_load(individual_data_plot)
-
-individual_data_plot
-
-```
-
-```{r fig-cond-effs-data-plot, message=FALSE, warning=FALSE, echo=FALSE, fig.height=10, fig.width=10, fig.cap="Conditional estimates plot. The dashed line across the identity is provided to aid with visual interpretation where strong identity would be indicated where model estimates straddle this line, where they fall below the line it would indicate that perception underestimates actual assistance provided, and vice versa where they fall above the line."}
-
-targets::tar_load(cond_effs_plot)
-
-cond_effs_plot
-
-```
-
-```{r tbl-random-effs-tab, message=FALSE, warning=FALSE, echo=FALSE, tbl.cap.location = "top", tbl.cap="Parameter estimates for both fixed and random effects (i.e., standard deviations between participants) on the logit scale."}
-
-targets::tar_load(tidy_model_brms)
-
-tidy_model_brms <- tidy_model_brms[1:14,] %>%
-  select(-std.error) %>%
-  mutate(term = str_remove(term,"sd__"))
-
-fixed_effs <- tidy_model_brms[1:7,] %>%
-  select(-effect,-component,-group)
-
-random_effs <- tidy_model_brms[8:14,] %>%
-  rename(SD = "estimate",
-         SD.conf.low = "conf.low",
-         SD.conf.high = "conf.high") %>%
-  select(-effect,-component,-group)
-
-all_effs <- left_join(fixed_effs, random_effs, by = "term") %>%
-  mutate(sd_mean_ratio = SD/estimate) %>%
+tidy_model_sprint <- rbind(disability_tab, classif_tab) %>%
   mutate_if(is.numeric, round, 2)
 
-all_effs$term <- recode(all_effs$term,
-                        "(Intercept)" = "Intercept",
-                        "actual_assistance_percentage" = "Actual Assistance Provided",
-                        "roletrainee" = "Role: (Trainee)",
-                        "forced_rep_no" = "Forced Repetition Number",
-                        "actual_assistance_percentage:roletrainee" = "Actual Assistance Provided * Role: (Trainee)",
-                        "actual_assistance_percentage:forced_rep_no" = "Actual Assistance Provided * Forced Repetition Number",
-                        "roletrainee:forced_rep_no" = "Role: (Trainee) * Forced Repetition Number",
-)
+
+tidy_model_sprint$term <- recode(tidy_model_sprint$term,
+                              "(Intercept)" = "Intercept",
+                              "disabilitySCI" = "$Disability_{SCI}$",
+                              "distance5M10m" = "$Distance_{5-10m}$",
+                              "distance10M15m" = "$Distance_{10-15m}$",
+                              "distance15M20m" = "$Distance_{15-20m}$",
+                              "disabilitySCI:distance5M10m" = "$Disability_{SCI}$:$Distance_{5-10m}$",
+                              "disabilitySCI:distance10M15m" = "$Disability_{SCI}$:$Distance_{10-15m}$",
+                              "disabilitySCI:distance15M20m" = "$Disability_{SCI}$:$Distance_{15-20m}$",
+                              "sd__(Intercept)" = "$\\sigma_{Intercept}$",  
+                              "sd__distance5M10m" = "$\\sigma_{distance5M10m}$",
+                              "sd__distance10M15m" = "$\\sigma_{distance10M15m}$",
+                              "sd__distance15M20m" = "$\\sigma_{distance15M20m}$",
+                              "cor__(Intercept).distance5M10m" = "$\\rho_{Intercept:Distance_{5-10m}}$",
+                              "cor__(Intercept).distance10M15m" = "$\\rho_{Intercept:Distance_{10-15m}}$",
+                              "cor__(Intercept).distance15M20m" = "$\\rho_{Intercept:Distance_{15-20m}}$",
+                              "cor__distance5M10m.distance10M15m" = "$\\rho_{Distance_{5-10m}:Distance_{10-15m}}$",
+                              "cor__distance5M10m.distance15M20m" = "$\\rho_{Distance_{5-10m}:Distance_{15-20m}}$",
+                              "cor__distance10M15m.distance15M20m" = "$\\rho_{Distance_{10-15m}:Distance_{15-20m}}$",
+                              "sd__Observation" = "$\\sigma_{Residual}$",
+                              
+                              "classif5" = "$Classification_{5}$",
+                              "classif5:distance5M10m" = "$Classification_{5}$:$Distance_{5-10m}$",
+                              "classif5:distance10M15m" = "$Classification_{5}$:$Distance_{10-15m}$",
+                              "classif5:distance15M20m" = "$Classification_{5}$:$Distance_{15-20m}$"
+                              )
+
+tidy_model_sprint <- tidy_model_sprint[c(1:14,16,15,17:33,35,35,36:38),]
+```
+
+## Sprint trial outcomes
+
+The overall grand means and credible intervals from the models for the fixed effects (i.e., without including the random effects) for both velocity and acceleration can be seen in @fig-velocity-model-plot and @fig-acceleration-model-plot, in addition to individual data, respectively for both disability and classification models. All parameters for both outcomes and both disability and classification models are also shown in @tbl-sprint-model.
+
+```{r} 
+#| message: false
+#| warning: false
+#| echo: false
+#| label: tbl-sprint-model 
+#| tbl-cap-location: "top"
+#| tbl-cap: Model parameter estimates for both fixed and random effects for sprint trial outcomes (velocity and acceleration).
 
 
 knitr::kable(
-  all_effs,
-  align = c("l","c","c","c","c","c","c","r"),
+  tidy_model_sprint,
+  align = c("l","c","c","c","c","c","c"),
   col.names = c("Model Term",
-                "Estimate (Mean)",
-                "Lower 95% CI (Mean)",
-                "Upper 95% CI (Mean)",
-                "Estimate (SD)",
-                "Lower 95% CI (SD)",
-                "Upper 95% CI (SD)",
-                "Ratio of SD to Mean Estimate")
+                "Estimate",
+                "Lower 95% CI",
+                "Upper 95% CI",
+                "Estimate",
+                "Lower 95% CI",
+                "Upper 95% CI"
+                )
 ) %>%
-  footnote(general = c("CI = credible interval", "SD = standard deviation")
+  footnote(general = c("CI = credible interval")
            ) %>%
   row_spec(0, bold = TRUE) %>%
   kable_classic(full_width = FALSE) %>%
-  add_header_above(c(" " = 1, "Means" = 3, "Standard Deviations" = 3, "Heterogeneity" = 1)) %>%
-  column_spec(2, border_left = TRUE) %>%
-  column_spec(4, background = "lightgray", border_right = TRUE) %>%
-  column_spec(3, background = "lightgray") %>%
-  column_spec(6, background = "lightgray") %>%
-  column_spec(7, background = "lightgray",border_right = TRUE) %>%
+  add_header_above(c(" ", "Velocity $\\\\(m\U00B7s^{-1})$" = 3, "Acceleration $\\\\(m\U00B7s^{-2})$" = 3), 
+                   escape = FALSE) %>%
+  pack_rows("Disability Model", 1,19) %>%
+  pack_rows("Fixed Effects", 1,8, italic = TRUE, bold = FALSE) %>%
+  pack_rows("Random Effects", 9,19, italic = TRUE, bold = FALSE) %>%
+  pack_rows("Classification Model", 20,38) %>%
+  pack_rows("Fixed Effects", 20,27, italic = TRUE, bold = FALSE) %>%
+  pack_rows("Random Effects", 28,38, italic = TRUE, bold = FALSE) %>%
   kableExtra::kable_styling()
 
 ```
+
+
+
+```{r fig-velocity-model-plot, message=FALSE, warning=FALSE, echo=FALSE, fig.height=7.5, fig.width=15, fig.cap="Individual data (top row) and global grand means with distribution and 95% credible interval estimates from the expectation of the posterior predictive distribution (bottom row) for velocity by both disability, panels (A) and (B), and classification, panels (C) and (D)."}
+
+targets::tar_load(combined_velocity_plot)
+
+combined_velocity_plot
+
+```
+```{r fig-acceleration-model-plot, message=FALSE, warning=FALSE, echo=FALSE, fig.height=7.5, fig.width=15, fig.cap="Individual data (top row) and global grand means with distribution and 95% credible interval estimates from the expectation of the posterior predictive distribution (bottom row) for acceleration by both disability, panels (A) and (B), and classification, panels (C) and (D)."}
+
+targets::tar_load(combined_acceleration_plot)
+
+combined_acceleration_plot
+
+```
+
+## Repeated sprint trial outcomes
 
 # References
