@@ -1,5 +1,5 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-.Random.seed|object|b878d1176959061d|||||||||||||||
+.Random.seed|object|0f2bdfc013304414|||||||||||||||
 acceleration_data|stem|bc19a929bef4deed|effd4a8406712406|498a56aa25f40364|-399840953||t19590.5772070525s|4ff05336d644dae2|106|rds|local|vector|||0.05||
 classif_acceleration_model|stem|e3a3e767a833837f|0f17382ba5c83370|e91de3ac5d4fbb96|1328232803||t19590.6949587707s|f31201f14f0b31f7|53352690|rds|local|vector|||95.39||
 classif_acceleration_model_plot|stem|60a8b7f4959910c5|1bfb62baa39b04fe|00fe5fc7a99e334f|1413294842||t19591.4378153717s|16c71cfb8247de4e|179313052|rds|local|vector|||2.08||
@@ -58,7 +58,7 @@ get_disability_rsa_predicted_values|function|8bbccea00b261873|||||||||||||||
 get_disability_rsa_summaries|function|b85a41aa0bda2325|||||||||||||||
 get_rsa_data|function|0ab6819bde5c4e9d|||||||||||||||
 get_rsa_summaries|function|b85a41aa0bda2325|||||||||||||||
-get_sprint_data|function|cdea1c3d1cf6b078|||||||||||||||
+get_sprint_data|function|6f5f5250e02d362f|||||||||||||||
 get_tidy_model|function|90abdc3bf63838c4|||||||||||||||
 get_velocity_data|function|67645432d8141dc0|||||||||||||||
 ind_classif_acceleration_plot|stem|ea2c69fad2e4bf95|f459f4edcbb583b8|9a19b3f0c81ad6f8|-1940483614||t19591.4963361084s|d07b1c7ab1748438|81067|rds|local|vector|||0.07|1m22mUsing size aesthetic for lines was deprecated in ggplot2 3.4.0.36mℹ39m Please use linewidth instead.|
@@ -100,7 +100,7 @@ pp_check_classif_velocity_model|stem|f94dc6edff19406d|35e380ab33069e36|3e3f8a8b9
 pp_check_disability_acceleration_model|stem|9e1676c597cf9fc1|364bdf6ebef0b3eb|c0930474125ac487|79710378||t19590.6991518276s|64aafaff9f15b10d|127168|rds|local|vector|||0.42||
 pp_check_disability_rsa_model|stem|1c05c65fa9782012|e6402abbd71f4f39|65ef16fbcaa2c672|1357168719||t19591.3968495887s|2019a834cffde476|241887|rds|local|vector|||0.86||
 pp_check_disability_velocity_model|stem|2dbbdb59601f7ac4|3a179bfe90794683|1b4b60d66bc1e50a|1891378691||t19590.6984297613s|f5edb5ebe3c31f22|126721|rds|local|vector|||0.36||
-report|stem|0bc55d0a24d82282|70b63383e01624f9|5970c00d69ea209d|-237041703|report.docx*report.qmd|t19591.5939897341s|1e9f83b4dbf76c1d|231746|file|local|vector|||147.58||
+report|stem|318f9526e5393a43|70b63383e01624f9|5970c00d69ea209d|-237041703|report.docx*report.qmd|t19591.6141237122s|7885ff763936d9e9|231619|file|local|vector|||148.29||
 rhat_plot_classif_acceleration_model|stem|e38a966060fb12c0|d7e98aad69cb7043|72c6853d839ecac9|-198332388||t19590.6997886333s|0a4192e343abbfaf|53509594|rds|local|vector|||1.35||
 rhat_plot_classif_rsa_model|stem|5feb4b8ee6cd0870|0ecc2b190be486b8|76607644376b180f|2087419552||t19591.3984027255s|c3c3d7228c24c948|57696713|rds|local|vector|||1.1||
 rhat_plot_classif_velocity_model|stem|53d52deb1319185f|911c34d82172ba7c|2e9bce419bee296a|1732897968||t19590.6992981245s|d938e8f5958b3e13|53333641|rds|local|vector|||0.92||
@@ -109,7 +109,7 @@ rhat_plot_disability_rsa_model|stem|e58928ab2c75729b|3da82d0efa76f8eb|80f05b1c98
 rhat_plot_disability_velocity_model|stem|c57b48131a36542c|bc03d5c8ee90cd7d|62ebf35001db1d25|388148286||t19590.6987965811s|8c213f88e270ca3a|53383040|rds|local|vector|||0.93||
 rsa_data|stem|eca1b6151d90f386|354039efa39029a6|5474015de8fca6df|1900170596||t19591.3909908728s|b133e4e0ed849e72|2687|rds|local|vector|||0.03||
 rsa_file|stem|4e7d486a356ea208|14bb5ce10636875d|ef46db3751d8e999|1833299739|rsa_data.csv|t19555.7017732549s|7dd5db65d3e5c882|7408|file|local|vector|||1.44|package tidyverse was built under R version 4.2.3. package ggplot2 was built under R version 4.2.3. package tibble was built under R version 4.2.3. package tidyr was built under R version 4.2.3. package readr was built under R version 4.2.3. package purrr was built under R version 4.2.3. package dplyr was built under R version 4.2.3. package forcats was built under R version 4.2.3. package lubridate was built under R version 4.2.3|
-sprint_data|stem|7ed91f02bc1fd928|7c9558faf77414e7|52c04da96c8bbe08|259950124||t19590.5921551548s|63ff38988a3ac6d5|1603|rds|local|vector|||0.08||
+sprint_data|stem|7ed91f02bc1fd928|7c9558faf77414e7|66476de486d445e6|259950124||t19591.6120824609s|63ff38988a3ac6d5|1603|rds|local|vector|||0.06||
 sprint_file|stem|7bb9b2c9a0acce65|ba8c69ee8dc2109c|ef46db3751d8e999|1466868339|sprint_data.csv|t19589.9089283337s|7adf95497078ee3c|9098|file|local|vector|||3.1|package ggplot2 was built under R version 4.2.3. package tibble was built under R version 4.2.3. package tidyr was built under R version 4.2.3. package readr was built under R version 4.2.3. package purrr was built under R version 4.2.3. package stringr was built under R version 4.2.3. package forcats was built under R version 4.2.3. package lubridate was built under R version 4.2.3. package rstan was built under R version 4.2.3. package StanHeaders was built under R version 4.2.3|
 tidy_classif_acceleration_model|stem|38e8f9bcb2d58b57|c246923a51ea96ed|ee557dd6445ddfa2|840580510||t19590.69974327s|0b575e4744178968|1201|rds|local|vector|||0.21||
 tidy_classif_rsa_model|stem|6b37c17cf8ed68e8|29dfb547eb52a02f|539d47756d505f37|198713756||t19591.400083281s|fde7712848a8fac6|1766|rds|local|vector|||0.12|some parameter names contain underscores term naming may be unreliable|

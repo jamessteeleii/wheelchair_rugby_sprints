@@ -53,10 +53,10 @@ $$
 \left(
   \begin{array}{c} 
     \begin{aligned}
-      &\gamma_{0}^{\alpha} + \gamma_{1}^{\alpha}(\operatorname{group{diff}}_{\operatorname{SCI}}) \\
-      &\gamma^{\beta_{1}}_{0} + \gamma^{\beta_{1}}_{1}(\operatorname{group{diff}}_{\operatorname{SCI}}) \\
-      &\gamma^{\beta_{2}}_{0} + \gamma^{\beta_{2}}_{1}(\operatorname{group{diff}}_{\operatorname{SCI}}) \\
-      &\gamma^{\beta_{3}}_{0} + \gamma^{\beta_{3}}_{1}(\operatorname{group{diff}}_{\operatorname{SCI}})
+      &\gamma_{0}^{\alpha} + \gamma_{1}^{\alpha}(\operatorname{group}_{\operatorname{diff}}) \\
+      &\gamma^{\beta_{1}}_{0} + \gamma^{\beta_{1}}_{1}(\operatorname{group}_{\operatorname{diff}}) \\
+      &\gamma^{\beta_{2}}_{0} + \gamma^{\beta_{2}}_{1}(\operatorname{group}_{\operatorname{diff}}) \\
+      &\gamma^{\beta_{3}}_{0} + \gamma^{\beta_{3}}_{1}(\operatorname{group}_{\operatorname{diff}})
     \end{aligned}
   \end{array}
 \right)
@@ -82,8 +82,8 @@ For the sprint trials we examined both the time in seconds for each of the 5m se
 $$
 \begin{aligned}
   \operatorname{time}_{i}  &\sim N \left(\mu, \sigma^2 \right) \\
-    \mu &=\alpha_{j[i]} + \beta_{1j[i]}(\operatorname{sprint number}) + \beta_{2j[i]}(\operatorname{distance}_{\operatorname{5-10m}}) + \beta_{3j[i]}(\operatorname{distance}_{\operatorname{10-15m}})\ + \\
-&\quad \beta_{4j[i]}(\operatorname{distance}_{\operatorname{15-20m}}) + \beta_{5}(\operatorname{distance}_{\operatorname{5-10m}} \times \operatorname{sprint number}) + \beta_{6}(\operatorname{distance}_{\operatorname{10-15m}} \times \operatorname{sprint number}) + \beta_{7}(\operatorname{distance}_{\operatorname{15-20m}} \times \operatorname{sprint number}) \\    
+    \mu &=\alpha_{j[i]} + \beta_{1j[i]}(\operatorname{sprint\_number}) + \beta_{2j[i]}(\operatorname{distance}_{\operatorname{5-10m}}) + \beta_{3j[i]}(\operatorname{distance}_{\operatorname{10-15m}})\ + \\
+&\quad \beta_{4j[i]}(\operatorname{distance}_{\operatorname{15-20m}}) + \beta_{5}(\operatorname{distance}_{\operatorname{5-10m}} \times \operatorname{sprint\_number}) + \beta_{6}(\operatorname{distance}_{\operatorname{10-15m}} \times \operatorname{sprint\_number}) + \beta_{7}(\operatorname{distance}_{\operatorname{15-20m}} \times \operatorname{sprint\_number}) \\    
 \left(
   \begin{array}{c} 
     \begin{aligned}
@@ -99,11 +99,11 @@ $$
 \left(
   \begin{array}{c} 
     \begin{aligned}
-      &\gamma_{0}^{\alpha} + \gamma_{1}^{\alpha}(\operatorname{group{diff}}_{\operatorname{5}}) \\
-      &\gamma^{\beta_{1}}_{0} + \gamma^{\beta_{1}}_{1}(\operatorname{group{diff}}_{\operatorname{5}}) \\
-      &\gamma^{\beta_{2}}_{0} + \gamma^{\beta_{2}}_{1}(\operatorname{group{diff}}_{\operatorname{5}}) + \gamma^{\beta_{2}}_{2}(\operatorname{group{diff}}_{\operatorname{5}} \times \operatorname{sprint number}) \\
-      &\gamma^{\beta_{3}}_{0} + \gamma^{\beta_{3}}_{2}(\operatorname{group{diff}}_{\operatorname{5}}) + \gamma^{\beta_{3}}_{1}(\operatorname{group{diff}}_{\operatorname{5}} \times \operatorname{sprint number}) \\
-      &\gamma^{\beta_{4}}_{0} + \gamma^{\beta_{4}}_{1}(\operatorname{group{diff}}_{\operatorname{5}}) + \gamma^{\beta_{4}}_{2}(\operatorname{group{diff}}_{\operatorname{5}} \times \operatorname{sprint number})
+      &\gamma_{0}^{\alpha} + \gamma_{1}^{\alpha}(\operatorname{group}_{\operatorname{diff}}) \\
+      &\gamma^{\beta_{1}}_{0} + \gamma^{\beta_{1}}_{1}(\operatorname{group}_{\operatorname{diff}}) \\
+      &\gamma^{\beta_{2}}_{0} + \gamma^{\beta_{2}}_{1}(\operatorname{group}_{\operatorname{diff}}) + \gamma^{\beta_{2}}_{2}(\operatorname{group}_{\operatorname{diff}} \times \operatorname{sprint\_number}) \\
+      &\gamma^{\beta_{3}}_{0} + \gamma^{\beta_{3}}_{2}(\operatorname{group}_{\operatorname{diff}}) + \gamma^{\beta_{3}}_{1}(\operatorname{group}_{\operatorname{diff}} \times \operatorname{sprint\_number}) \\
+      &\gamma^{\beta_{4}}_{0} + \gamma^{\beta_{4}}_{1}(\operatorname{group}_{\operatorname{diff}}) + \gamma^{\beta_{4}}_{2}(\operatorname{group}_{\operatorname{diff}} \times \operatorname{sprint\_number})
     \end{aligned}
   \end{array}
 \right)

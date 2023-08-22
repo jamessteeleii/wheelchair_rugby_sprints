@@ -146,7 +146,7 @@ make_classif_rsa_model_plot <- function(data, model) {
 
 # Get sprint trial data
 get_sprint_data <- function(file) {
-  data <- read.csv("sprint_data.csv", fileEncoding = 'UTF-8-BOM') %>%
+  data <- read.csv(file, fileEncoding = 'UTF-8-BOM') %>%
     mutate_if(is.character,as.factor) %>%
     mutate(classif = as.factor(classif))
 
