@@ -53,10 +53,10 @@ $$
 \left(
   \begin{array}{c} 
     \begin{aligned}
-      &\gamma_{0}^{\alpha} + \gamma_{1}^{\alpha}(\operatorname{group}_{\operatorname{diff}}) \\
-      &\gamma^{\beta_{1}}_{0} + \gamma^{\beta_{1}}_{1}(\operatorname{group}_{\operatorname{diff}}) \\
-      &\gamma^{\beta_{2}}_{0} + \gamma^{\beta_{2}}_{1}(\operatorname{group}_{\operatorname{diff}}) \\
-      &\gamma^{\beta_{3}}_{0} + \gamma^{\beta_{3}}_{1}(\operatorname{group}_{\operatorname{diff}})
+      &\gamma_{0}^{\alpha} + \gamma_{1}^{\alpha}(\operatorname{group{diff}}_{\operatorname{SCI}}) \\
+      &\gamma^{\beta_{1}}_{0} + \gamma^{\beta_{1}}_{1}(\operatorname{group{diff}}_{\operatorname{SCI}}) \\
+      &\gamma^{\beta_{2}}_{0} + \gamma^{\beta_{2}}_{1}(\operatorname{group{diff}}_{\operatorname{SCI}}) \\
+      &\gamma^{\beta_{3}}_{0} + \gamma^{\beta_{3}}_{1}(\operatorname{group{diff}}_{\operatorname{SCI}})
     \end{aligned}
   \end{array}
 \right)
@@ -82,7 +82,8 @@ For the sprint trials we examined both the time in seconds for each of the 5m se
 $$
 \begin{aligned}
   \operatorname{time}_{i}  &\sim N \left(\mu, \sigma^2 \right) \\
-    \mu &=\alpha_{j[i]} + \beta_{1j[i]}(\operatorname{sprint\_number}) + \beta_{2j[i]}(\operatorname{distance}_{\operatorname{5-10m}}) + \beta_{3j[i]}(\operatorname{distance}_{\operatorname{10-15m}}) + \beta_{4j[i]}(\operatorname{distance}_{\operatorname{15-20m}}) + \beta_{5}(\operatorname{distance}_{\operatorname{5-10m}} \times \operatorname{sprint\_number}) + \beta_{6}(\operatorname{distance}_{\operatorname{10-15m}} \times \operatorname{sprint\_number}) + \beta_{7}(\operatorname{distance}_{\operatorname{15-20m}} \times \operatorname{sprint\_number}) \\    
+    \mu &=\alpha_{j[i]} + \beta_{1j[i]}(\operatorname{sprint number}) + \beta_{2j[i]}(\operatorname{distance}_{\operatorname{5-10m}}) + \beta_{3j[i]}(\operatorname{distance}_{\operatorname{10-15m}})\ + \\
+&\quad \beta_{4j[i]}(\operatorname{distance}_{\operatorname{15-20m}}) + \beta_{5}(\operatorname{distance}_{\operatorname{5-10m}} \times \operatorname{sprint number}) + \beta_{6}(\operatorname{distance}_{\operatorname{10-15m}} \times \operatorname{sprint number}) + \beta_{7}(\operatorname{distance}_{\operatorname{15-20m}} \times \operatorname{sprint number}) \\    
 \left(
   \begin{array}{c} 
     \begin{aligned}
@@ -98,11 +99,11 @@ $$
 \left(
   \begin{array}{c} 
     \begin{aligned}
-      &\gamma_{0}^{\alpha} + \gamma_{1}^{\alpha}(\operatorname{group}_{\operatorname{diff}}) \\
-      &\gamma^{\beta_{1}}_{0} + \gamma^{\beta_{1}}_{1}(\operatorname{group}_{\operatorname{diff}}) \\
-      &\gamma^{\beta_{2}}_{0} + \gamma^{\beta_{2}}_{1}(\operatorname{group}_{\operatorname{diff}}) + \gamma^{\beta_{2}}_{2}(\operatorname{group}_{\operatorname{diff}} \times \operatorname{sprint\_number}) \\
-      &\gamma^{\beta_{3}}_{0} + \gamma^{\beta_{3}}_{2}(\operatorname{group}_{\operatorname{diff}}) + \gamma^{\beta_{3}}_{1}(\operatorname{group}_{\operatorname{diff}} \times \operatorname{sprint\_number}) \\
-      &\gamma^{\beta_{4}}_{0} + \gamma^{\beta_{4}}_{1}(\operatorname{group}_{\operatorname{diff}}) + \gamma^{\beta_{4}}_{2}(\operatorname{group}_{\operatorname{diff}} \times \operatorname{sprint\_number})
+      &\gamma_{0}^{\alpha} + \gamma_{1}^{\alpha}(\operatorname{group{diff}}_{\operatorname{5}}) \\
+      &\gamma^{\beta_{1}}_{0} + \gamma^{\beta_{1}}_{1}(\operatorname{group{diff}}_{\operatorname{5}}) \\
+      &\gamma^{\beta_{2}}_{0} + \gamma^{\beta_{2}}_{1}(\operatorname{group{diff}}_{\operatorname{5}}) + \gamma^{\beta_{2}}_{2}(\operatorname{group{diff}}_{\operatorname{5}} \times \operatorname{sprint number}) \\
+      &\gamma^{\beta_{3}}_{0} + \gamma^{\beta_{3}}_{2}(\operatorname{group{diff}}_{\operatorname{5}}) + \gamma^{\beta_{3}}_{1}(\operatorname{group{diff}}_{\operatorname{5}} \times \operatorname{sprint number}) \\
+      &\gamma^{\beta_{4}}_{0} + \gamma^{\beta_{4}}_{1}(\operatorname{group{diff}}_{\operatorname{5}}) + \gamma^{\beta_{4}}_{2}(\operatorname{group{diff}}_{\operatorname{5}} \times \operatorname{sprint number})
     \end{aligned}
   \end{array}
 \right)
@@ -175,9 +176,82 @@ tidy_model_sprint$term <- recode(tidy_model_sprint$term,
 tidy_model_sprint <- tidy_model_sprint[c(1:14,16,15,17:33,35,35,36:38),]
 ```
 
+```{r} 
+#| message: false
+#| warning: false
+#| echo: false
+
+targets::tar_load(tidy_disability_rsa_model)
+targets::tar_load(tidy_classif_rsa_model)
+
+tidy_model_rsa <- rbind(tidy_disability_rsa_model,
+                         tidy_classif_rsa_model) %>%
+  select(term, estimate, conf.low, conf.high)  %>%
+  mutate_if(is.numeric, round, 2)
+
+
+tidy_model_rsa$term <- recode(tidy_model_rsa$term,
+                              "(Intercept)" = "Intercept",
+                              "disabilitySCI" = "$Disability_{SCI}$",
+                              "sprint_number" = "Sprint Number",
+                              "distance5M10m" = "$Distance_{5-10m}$",
+                              "distance10M15m" = "$Distance_{10-15m}$",
+                              "distance15M20m" = "$Distance_{15-20m}$",
+                              "disabilitySCI:sprint_number" = "$Disability_{SCI}$:Sprint Number",
+                              "disabilitySCI:distance5M10m" = "$Disability_{SCI}$:$Distance_{5-10m}$",
+                              "disabilitySCI:distance10M15m" = "$Disability_{SCI}$:$Distance_{10-15m}$",
+                              "disabilitySCI:distance15M20m" = "$Disability_{SCI}$:$Distance_{15-20m}$",
+                              "sprint_number:distance5M10m" = "Sprint Number:$Distance_{5-10m}$",
+                              "sprint_number:distance10M15m" = "Sprint Number:$Distance_{10-15m}$",
+                              "sprint_number:distance15M20m" = "Sprint Number:$Distance_{15-20m}$",
+                              "disabilitySCI:sprint_number:distance5M10m" = "$Disability_{SCI}$:Sprint Number:$Distance_{5-10m}$",
+                              "disabilitySCI:sprint_number:distance10M15m" = "$Disability_{SCI}$:Sprint Number:$Distance_{10-15m}$",
+                              "disabilitySCI:sprint_number:distance15M20m" = "$Disability_{SCI}$:Sprint Number:$Distance_{15-20m}$",
+                              
+                              "sd__(Intercept)" = "$\\sigma_{Intercept}$",  
+                              "sd__sprint_number" = "$\\sigma_{Sprint Number}$",
+                              "sd__distance5M10m" = "$\\sigma_{distance5M10m}$",
+                              "sd__distance10M15m" = "$\\sigma_{distance10M15m}$",
+                              "sd__distance15M20m" = "$\\sigma_{distance15M20m}$",
+                              
+                              "cor__(Intercept).sprint_number" = "$\\rho_{Intercept:Sprint Number}$",
+                              "cor__(Intercept).distance5M10m" = "$\\rho_{Intercept:Distance_{5-10m}}$",
+                              "cor__(Intercept).distance10M15m" = "$\\rho_{Intercept:Distance_{10-15m}}$",
+                              "cor__(Intercept).distance15M20m" = "$\\rho_{Intercept:Distance_{15-20m}}$",
+                              
+                              "cor__sprint_number.distance10M15m" = "$\\rho_{Sprint Number:Distance_{10-15m}}$",
+                              "cor__sprint_number.distance15M20m" = "$\\rho_{Sprint Number:Distance_{15-20m}}$",
+                              "cor__sprint_number.distance15M20m" = "$\\rho_{Sprint Number:Distance_{15-20m}}$",
+                              
+                              
+                              "cor__distance5M10m.distance10M15m" = "$\\rho_{Distance_{5-10m}:Distance_{10-15m}}$",
+                              "cor__distance5M10m.distance15M20m" = "$\\rho_{Distance_{5-10m}:Distance_{15-20m}}$",
+                              "cor__distance10M15m.distance15M20m" = "$\\rho_{Distance_{10-15m}:Distance_{15-20m}}$",
+                              "sd__Observation" = "$\\sigma_{Residual}$",
+                              
+                              "classif5" = "$Classification_{5}$",
+                              "classif5:sprint_number" = "$Classification_{5}$:Sprint Number",
+                              "classif5:distance5M10m" = "$Classification_{5}$:$Distance_{5-10m}$",
+                              "classif5:distance10M15m" = "$Classification_{5}$:$Distance_{10-15m}$",
+                              "classif5:distance15M20m" = "$Classification_{5}$:$Distance_{15-20m}$",
+                              "classif5:sprint_number:distance5M10m" = "$Classification_{5}$:Sprint Number:$Distance_{5-10m}$",
+                              "classif5:sprint_number:distance10M15m" = "$Classification_{5}$:Sprint Number:$Distance_{10-15m}$",
+                              "classif5:sprint_number:distance15M20m" = "$Classification_{5}$:Sprint Number:$Distance_{15-20m}$",
+                              
+                              )
+
+tidy_model_rsa <- tidy_model_rsa[c(1:21,22,23,25,28,24,26,29,27,30:55,57,60,56,58,61,59,62:64),]
+```
+
 ## Sprint trial outcomes
 
-The overall grand means and credible intervals from the models for the fixed effects (i.e., without including the random effects) for both velocity and acceleration can be seen in @fig-velocity-model-plot and @fig-acceleration-model-plot, in addition to individual data, respectively for both disability and classification models. All parameters for both outcomes and both disability and classification models are also shown in @tbl-sprint-model.
+The overall grand means and credible intervals from the models for the fixed effects (i.e., without including the random effects) for both velocity and acceleration can be seen in @fig-velocity-model-plot and @fig-acceleration-model-plot, in addition to individual data, respectively for both disability and classification models. All parameters for both outcomes and both disability and classification models are also shown in @tbl-sprint-model. As might be expected, fixed effects in both models revealed that velocity increased as distance covered increased and the reverse pattern for acceleration which decreased as distance covered increased. Random effects in both models showed that variation in velocities increased with increasing distance covered, and also the random effects correlations suggested that those who were initially faster, or faster during certain sections of the sprint, were similarly typically faster at all other distances. Variance in acceleration was more similar over increasing distance covered as compared with velocity, and also the random effects correlations suggested that those who had initially higher acceleration showed greater declines in acceleration across all distances, though between adjacent distances there were more positive relationships. 
+
+### Disability
+SCI participants showed slower velocities across all distances. There was however little interaction effect between disability and distance upon velocity. SCI participants also had lower acceleration across all distances. However, there were interactions between disability and distance whereby although over the initial 0-5m distance SCI participants had lower accelerations, the difference between them and participants with other injuries decreased as distance covered increased. During the final 10-15 and 15-20m accelerations were similar between groups. 
+
+### Classification
+Both 4s and 5s showed similar velocities across all distances, as well as accelerations. There was little effect of classification upon either velocity or acceleration.  
 
 ```{r} 
 #| message: false
@@ -218,14 +292,28 @@ knitr::kable(
 
 
 
-```{r fig-velocity-model-plot, message=FALSE, warning=FALSE, echo=FALSE, fig.height=7.5, fig.width=15, fig.cap="Individual data (top row) and global grand means with distribution and 95% credible interval estimates from the expectation of the posterior predictive distribution (bottom row) for velocity by both disability, panels (A) and (B), and classification, panels (C) and (D)."}
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| label: fig-velocity-model-plot 
+#| fig-width: 15
+#| fig-height: 7.5
+#| fig-cap: Individual data (top row) and global grand means with distribution and 95% credible interval estimates from the expectation of the posterior predictive distribution (bottom row) for velocity by both disability, panels (A) and (B), and classification, panels (C) and (D).
 
 targets::tar_load(combined_velocity_plot)
 
 combined_velocity_plot
 
 ```
-```{r fig-acceleration-model-plot, message=FALSE, warning=FALSE, echo=FALSE, fig.height=7.5, fig.width=15, fig.cap="Individual data (top row) and global grand means with distribution and 95% credible interval estimates from the expectation of the posterior predictive distribution (bottom row) for acceleration by both disability, panels (A) and (B), and classification, panels (C) and (D)."}
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| label: fig-acceleration-model-plot 
+#| fig-width: 15
+#| fig-height: 7.5
+#| fig-cap: Individual data (top row) and global grand means with distribution and 95% credible interval estimates from the expectation of the posterior predictive distribution (bottom row) for acceleration by both disability, panels (A) and (B), and classification, panels (C) and (D).
 
 targets::tar_load(combined_acceleration_plot)
 
@@ -234,5 +322,66 @@ combined_acceleration_plot
 ```
 
 ## Repeated sprint trial outcomes
+
+The overall grand means and credible intervals from the models for the fixed effects (i.e., without including the random effects) for repeated sprint times can be seen in @fig-rsa-model-plot and @fig-acceleration-model-plot, in addition to individual data and participant level linear smooths, respectively for both disability and classification models. All parameters for both outcomes and both disability and classification models are also shown in @tbl-rsa-model.
+
+On average, fixed effects in both models revealed that sprint number had little impact on time, however did interact with distance revealing greater increases in time for later sprints over increasing distances. Sprint number had little impact upon the initial 0-5m. Of course, trivially, time increased as distance covered increased. Random effects in both models showed, similarly to velocity in the sprint trials, that variation in times increased with increasing distance covered. Also the random effects correlations suggested that those who were initially faster at the beginning of a sprint, faster during certain sections of the sprint, or faster during a given sprint number, were similarly typically faster at all other distances and during all other sprint numbers. 
+
+### Disability
+Both SCI and other disabilities showed similar performances in the repeated sprints, across all distances, and all sprint numbers. There was little effect of disability upon either repeated sprint times.
+
+### Classification
+Both 4s and 5s showed similar performances in the repeated sprints, across all distances, and all sprint numbers. There was little effect of classification upon either repeated sprint times.
+
+```{r} 
+#| message: false
+#| warning: false
+#| echo: false
+#| label: tbl-rsa-model 
+#| tbl-cap-location: "top"
+#| tbl-cap: Model parameter estimates for both fixed and random effects for repeated sprint trial times.
+
+
+knitr::kable(
+  tidy_model_rsa,
+  align = c("l","c","c","c"),
+  col.names = c("Model Term",
+                "Estimate",
+                "Lower 95% CI",
+                "Upper 95% CI"
+              )
+) %>%
+  footnote(general = c("CI = credible interval")
+           ) %>%
+  row_spec(0, bold = TRUE) %>%
+  kable_classic(full_width = FALSE) %>%
+  add_header_above(c(" ", "Time (seconds)" = 3), 
+                   escape = FALSE) %>%
+  pack_rows("Disability Model", 1,32) %>%
+  pack_rows("Fixed Effects", 1,16, italic = TRUE, bold = FALSE) %>%
+  pack_rows("Random Effects", 17,32, italic = TRUE, bold = FALSE) %>%
+  pack_rows("Classification Model", 33,64) %>%
+  pack_rows("Fixed Effects", 33,48, italic = TRUE, bold = FALSE) %>%
+  pack_rows("Random Effects", 49,64, italic = TRUE, bold = FALSE) %>%
+  kableExtra::kable_styling()
+
+```
+
+
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| label: fig-rsa-model-plot 
+#| fig-width: 15
+#| fig-height: 7.5
+#| fig-cap: Individual data with linear smooths by participant (top row) and global grand means with distribution and 95% credible interval estimates from the expectation of the posterior predictive distribution (bottom row) for repeated sprint times by both disability, panels (A) and (B), and classification, panels (C) and (D).
+
+targets::tar_load(combined_rsa_plot)
+
+combined_rsa_plot
+
+```
 
 # References

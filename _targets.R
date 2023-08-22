@@ -135,7 +135,7 @@ list(
 
   ##### Reporting
   # Render the report
-  # tar_quarto(report, "report.qmd"),
+  tar_quarto(report, "report.qmd"),
 
   # Render the supplementary material
   tar_quarto(diagnostic_plots, "diagnostic_plots.qmd")
