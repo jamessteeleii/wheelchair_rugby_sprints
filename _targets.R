@@ -10,7 +10,6 @@ list(
   # Load in data
   tar_target(rsa_file, "rsa_data.csv", format = "file"),
   tar_target(rsa_data, get_rsa_data(rsa_file)),
-  # tar_target(sprint_data, get_sprint_data(sprint_file)),
 
   # Make individual data plots by disability and classification
   tar_target(ind_disability_rsa_plot, make_ind_disability_rsa_plot(rsa_data)),
@@ -93,10 +92,35 @@ list(
   tar_target(disability_acceleration_model_plot, make_disability_acceleration_model_plot(sprint_data, disability_acceleration_model)),
   tar_target(classif_acceleration_model_plot, make_classif_acceleration_model_plot(sprint_data, classif_acceleration_model)),
 
+  ##### Blood lactate
+  tar_target(lactate_file1, "Lactate class.csv", format = "file"),
+  tar_target(lactate_file2, "Lactate_sci_other.csv", format = "file"),
+  tar_target(lactate_data, get_lactate_data(lactate_file1, lactate_file2)),
+
+  # Fit models for lactate by disability and classification
+  tar_target(disability_lactate_model, fit_disability_lactate_model(lactate_data)),
+  tar_target(classif_lactate_model, fit_classif_lactate_model(lactate_data)),
+
+  # Get tidy model summaries
+  tar_target(tidy_disability_lactate_model, get_tidy_model(disability_lactate_model)),
+  tar_target(tidy_classif_lactate_model, get_tidy_model(classif_lactate_model)),
+
+  # Diagnostic plots
+  tar_target(rhat_plot_disability_lactate_model, make_rhat_plot(disability_lactate_model)),
+  tar_target(trace_plot_disability_lactate_model, make_trace_plots(disability_lactate_model)),
+  tar_target(pp_check_disability_lactate_model, make_pp_check(disability_lactate_model)),
+  tar_target(rhat_plot_classif_lactate_model, make_rhat_plot(classif_lactate_model)),
+  tar_target(trace_plot_classif_lactate_model, make_trace_plots(classif_lactate_model)),
+  tar_target(pp_check_classif_lactate_model, make_pp_check(classif_lactate_model)),
+
+  # Model plots i.e., global grand means and individual data
+  tar_target(disability_lactate_model_plot, make_disability_lactate_model_plot(lactate_data, disability_lactate_model)),
+  tar_target(classif_lactate_model_plot, make_classif_lactate_model_plot(lactate_data, classif_lactate_model)),
+
   ##### Combine and save plots as tiffs
 
   ### Repeated sprint ability
-  tar_target(combined_rsa_plot, combine_plots(ind_disability_rsa_plot, disability_rsa_model_plot,
+  tar_target(combined_rsa_plot, combine_four_plots(ind_disability_rsa_plot, disability_rsa_model_plot,
                                               ind_classif_rsa_plot, classif_rsa_model_plot,
                                              "Disability - Repeated Sprints",
                                              "Classification - Repeated Sprints",
@@ -109,36 +133,48 @@ list(
 
   ### Velocity
 
-  tar_target(combined_velocity_plot, combine_plots(ind_disability_velocity_plot, disability_velocity_model_plot,
+  tar_target(combined_velocity_plot, combine_four_plots(ind_disability_velocity_plot, disability_velocity_model_plot,
                                               ind_classif_velocity_plot, classif_velocity_model_plot,
                                               "Disability - Velocity",
                                               "Classification - Velocity",
-                                              "Model: Time ~ Disability * Distance + (Distance | ID)",
-                                              "Model: Time ~ Classification * Distance + (Distance | ID)")),
+                                              "Model: Velocity ~ Disability * Distance + (Distance | ID)",
+                                              "Model: Velocity ~ Classification * Distance + (Distance | ID)")),
 
 
   tar_target(combined_velocity_plot_tiff, make_plot_tiff(combined_velocity_plot, "plots/combined_velocity_plot.tiff",
                                                     width=15, height=7.5, device="tiff", dpi=300)),
 
-  # # Acceleration
+  ### Acceleration
 
-  tar_target(combined_acceleration_plot, combine_plots(ind_disability_acceleration_plot, disability_acceleration_model_plot,
+  tar_target(combined_acceleration_plot, combine_four_plots(ind_disability_acceleration_plot, disability_acceleration_model_plot,
                                                    ind_classif_acceleration_plot, classif_acceleration_model_plot,
                                                    "Disability - Acceleration",
                                                    "Classification - Acceleration",
-                                                   "Model: Time ~ Disability * Distance + (Distance | ID)",
-                                                   "Model: Time ~ Classification * Distance + (Distance | ID)")),
+                                                   "Model: Acceleration ~ Disability * Distance + (Distance | ID)",
+                                                   "Model: Acceleration ~ Classification * Distance + (Distance | ID)")),
 
 
   tar_target(combined_acceleration_plot_tiff, make_plot_tiff(combined_acceleration_plot, "plots/combined_acceleration_plot.tiff",
                                                          width=15, height=7.5, device="tiff", dpi=300)),
 
+  ### Lactate
+
+  tar_target(combined_lactate_plot, combine_two_plots(disability_lactate_model_plot, classif_lactate_model_plot,
+                                                            "Disability",
+                                                            "Classification",
+                                                            "Model: Lactate ~ Disability * Time + (1 | ID)",
+                                                            "Model: Lactate ~ Classification * Time + (1 | ID)")),
+
+
+  tar_target(combined_lactate_plot_tiff, make_plot_tiff(combined_lactate_plot, "plots/combined_lactate_plot.tiff",
+                                                             width=10, height=5, device="tiff", dpi=300)),
+
   ##### Reporting
   # Render the report
-  tar_quarto(report, "report.qmd"),
+  tar_quarto(report, "report.qmd")
 
   # Render the supplementary material
-  tar_quarto(diagnostic_plots, "diagnostic_plots.qmd")
+  # tar_quarto(diagnostic_plots, "diagnostic_plots.qmd")
 
 
 )

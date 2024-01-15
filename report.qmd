@@ -77,7 +77,7 @@ $$
 
 ## Repeated sprint trial outcomes
 
-For the sprint trials we examined both the time in seconds for each of the 5m sections of the 20m sprint as dependent variables in separate models. Data was handled in long format with each row corresponding to an observation of a participants time for a 5m section for a given sprint number. We fit separate models with fixed effects for either disability or classification, and in each also included a fixed effect for the distance (i.e., section of the 20m sprint trial: 0-5m, 5-10m, 10-15m, 15-20m) and also for the sprint number (from first to tenth), in addition to their interactions. We also used included random intercepts for participant and random slopes for both distance and sprint number. The model equation was, where $group_{diff}$ was either $disability_{SCI}$ or $classification_{5}$, thus:
+For the repeated sprint trials we examined the time in seconds for each of the 5m sections of the 20m sprint as a dependent variable. Data was handled in long format with each row corresponding to an observation of a participants time for a 5m section for a given sprint number. We fit separate models with fixed effects for either disability or classification, and in each also included a fixed effect for the distance (i.e., section of the 20m sprint trial: 0-5m, 5-10m, 10-15m, 15-20m) and also for the sprint number (from first to tenth), in addition to their interactions. We also used included random intercepts for participant and random slopes for both distance and sprint number. The model equation was, where $group_{diff}$ was either $disability_{SCI}$ or $classification_{5}$, thus:
 
 $$
 \begin{aligned}
@@ -121,7 +121,15 @@ $$
     \text{, for id j = 1,} \dots \text{,J}
 \end{aligned}
 $$
+We also examined the blood lactate pre- and post-repeated sprint trials as a dependent variable. Data was handled in long format with each row corresponding to an observation of a participants blood lactate at either pre- or post-repeated sprint trials. We fit separate models with fixed effects for either disability or classification, and in each also included a fixed effect for the time-point (i.e., pre- or post-repeated sprint trials coded as pre=0 and post=1), in addition to their interaction. We also used included random intercepts for participant. The model equation was, where $group_{diff}$ was either $disability_{SCI}$ or $classification_{5}$, thus:
 
+$$
+\begin{aligned}
+  \operatorname{lactate}_{i}  &\sim N \left(\alpha_{j[i]} + \beta_{1}(\operatorname{time}), \sigma^2 \right) \\
+    \alpha_{j}  &\sim N \left(\gamma_{0}^{\alpha} + \gamma_{1}^{\alpha}(\operatorname{group}_{\operatorname{diff}}) + \gamma_{2}^{\alpha}(\operatorname{group}_{\operatorname{diff}} \times \operatorname{time}), \sigma^2_{\alpha_{j}} \right)
+    \text{, for id j = 1,} \dots \text{,J}
+\end{aligned}
+$$
 # Results
 ```{r} 
 #| message: false
@@ -220,7 +228,7 @@ tidy_model_rsa$term <- recode(tidy_model_rsa$term,
                               "cor__(Intercept).distance15M20m" = "$\\rho_{Intercept:Distance_{15-20m}}$",
                               
                               "cor__sprint_number.distance10M15m" = "$\\rho_{Sprint Number:Distance_{10-15m}}$",
-                              "cor__sprint_number.distance15M20m" = "$\\rho_{Sprint Number:Distance_{15-20m}}$",
+                              "cor__sprint_number.distance5M10m" = "$\\rho_{Sprint Number:Distance_{5-10m}}$",
                               "cor__sprint_number.distance15M20m" = "$\\rho_{Sprint Number:Distance_{15-20m}}$",
                               
                               
@@ -241,6 +249,35 @@ tidy_model_rsa$term <- recode(tidy_model_rsa$term,
                               )
 
 tidy_model_rsa <- tidy_model_rsa[c(1:21,22,23,25,28,24,26,29,27,30:55,57,60,56,58,61,59,62:64),]
+```
+
+```{r} 
+#| message: false
+#| warning: false
+#| echo: false
+
+targets::tar_load(tidy_disability_lactate_model)
+targets::tar_load(tidy_classif_lactate_model)
+
+tidy_model_lactate <- rbind(tidy_disability_lactate_model,
+                         tidy_classif_lactate_model) %>%
+  select(term, estimate, conf.low, conf.high)  %>%
+  mutate_if(is.numeric, round, 2)
+
+
+tidy_model_lactate$term <- recode(tidy_model_lactate$term,
+                              "(Intercept)" = "Intercept",
+                              "disabilitySCI" = "$Disability_{SCI}$",
+                              "time" = "Time",
+                              "disabilitySCI:time" = "$Disability_{SCI}$:Time",
+                              
+                              "sd__(Intercept)" = "$\\sigma_{Intercept}$",  
+                              "sd__Observation" = "$\\sigma_{Residual}$",
+                              
+                              "class5" = "$Classification_{5}$",
+                              "class5:time" = "$classication_{5}$:Time"
+                              )
+
 ```
 
 ## Sprint trial outcomes
@@ -323,14 +360,16 @@ combined_acceleration_plot
 
 ## Repeated sprint trial outcomes
 
+### Sprint times
+
 The overall grand means and credible intervals from the models for the fixed effects (i.e., without including the random effects) for repeated sprint times can be seen in @fig-rsa-model-plot and @fig-acceleration-model-plot, in addition to individual data and participant level linear smooths, respectively for both disability and classification models. All parameters for both outcomes and both disability and classification models are also shown in @tbl-rsa-model.
 
 On average, fixed effects in both models revealed that sprint number had little impact on time, however did interact with distance revealing greater increases in time for later sprints over increasing distances. Sprint number had little impact upon the initial 0-5m. Of course, trivially, time increased as distance covered increased. Random effects in both models showed, similarly to velocity in the sprint trials, that variation in times increased with increasing distance covered. Also the random effects correlations suggested that those who were initially faster at the beginning of a sprint, faster during certain sections of the sprint, or faster during a given sprint number, were similarly typically faster at all other distances and during all other sprint numbers. 
 
-### Disability
+#### Disability
 Both SCI and other disabilities showed similar performances in the repeated sprints, across all distances, and all sprint numbers. There was little effect of disability upon either repeated sprint times.
 
-### Classification
+#### Classification
 Both 4s and 5s showed similar performances in the repeated sprints, across all distances, and all sprint numbers. There was little effect of classification upon either repeated sprint times.
 
 ```{r} 
@@ -381,6 +420,66 @@ knitr::kable(
 targets::tar_load(combined_rsa_plot)
 
 combined_rsa_plot
+
+```
+
+### Blood lactate
+The overall grand means and credible intervals from the models for the fixed effects (i.e., without including the random effects) for blood lactate can be seen in @fig-lactate-model-plot in addition to individual data, respectively for both disability and classification models. All parameters for both outcomes and both disability and classification models are also shown in @tbl-lactate-model. As might be expected, fixed effects in both models revealed that blood lactate increased as from pre- to post-repeated sprint trials (see $Time$ terms in @tbl-lactate-model). Random intercepts also showed some variation in baseline blood lactate levels. 
+
+### Disability
+There was little difference in average blood lactate levels between those with SCI or other disabilities, nor was there a clear interaction effect suggesting both groups increased in blood lactate similarly. 
+
+### Classification
+Both 4s and 5s showed similar average blood lactate levels too. However, the posterior estimates were suggestive of an interaction effect little effect of classification upon either velocity or acceleration whereby 5s tended to show a greater increase in blood lactate levels post-repeated sprint trials.  
+
+```{r} 
+#| message: false
+#| warning: false
+#| echo: false
+#| label: tbl-lactate-model 
+#| tbl-cap-location: "top"
+#| tbl-cap: Model parameter estimates for both fixed and random effects for blood lactate pre- and post-repeated sprint trials.
+
+
+knitr::kable(
+  tidy_model_lactate,
+  align = c("l","c","c","c"),
+  col.names = c("Model Term",
+                "Estimate",
+                "Lower 95% CI",
+                "Upper 95% CI"
+              )
+) %>%
+  footnote(general = c("CI = credible interval")
+           ) %>%
+  row_spec(0, bold = TRUE) %>%
+  kable_classic(full_width = FALSE) %>%
+  add_header_above(c(" ", "Blood lactate ($\\\\(m\U00B7L^{-1})$)" = 3), 
+                   escape = FALSE) %>%
+  pack_rows("Disability Model", 1,6) %>%
+  pack_rows("Fixed Effects", 1,4, italic = TRUE, bold = FALSE) %>%
+  pack_rows("Random Effects", 5,6, italic = TRUE, bold = FALSE) %>%
+  pack_rows("Classification Model", 7,12) %>%
+  pack_rows("Fixed Effects", 7,9, italic = TRUE, bold = FALSE) %>%
+  pack_rows("Random Effects", 11,12, italic = TRUE, bold = FALSE) %>%
+  kableExtra::kable_styling()
+
+```
+
+
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| label: fig-lactate-model-plot 
+#| fig-width: 15
+#| fig-height: 7.5
+#| fig-cap: Individual data with linear smooths by participant (top row) and global grand means with distribution and 95% credible interval estimates from the expectation of the posterior predictive distribution (bottom row) for repeated sprint times by both disability, panels (A) and (B), and classification, panels (C) and (D).
+
+targets::tar_load(combined_lactate_plot)
+
+combined_lactate_plot
 
 ```
 

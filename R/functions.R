@@ -261,7 +261,7 @@ make_disability_velocity_model_plot <- function(data, model) {
     scale_color_brewer(palette = "Dark2") +
     labs(
       subtitle = "Global grand mean and 95% credible interval (CI)",
-      x="Sprint Number",
+      x="Distance",
       y=bquote("Velocity (m\U00B7"*"s"^-1*")"),
       color = "Disability", fill = "Disability") +
     theme_classic()
@@ -282,7 +282,7 @@ make_classif_velocity_model_plot <- function(data, model) {
     scale_color_brewer(palette = "Dark2") +
     labs(
       subtitle = "Global grand mean and 95% credible interval (CI)",
-      x="Sprint Number",
+      x="Distance",
       y=bquote("Velocity (m\U00B7"*"s"^-1*")"),
       color = "Classification", fill = "Classification") +
     theme_classic()
@@ -299,7 +299,7 @@ make_ind_disability_acceleration_plot <- function(data) {
     geom_line(aes(y=acceleration, group=interaction(id,trial)), size=0.75, alpha=0.5) +
     geom_point(aes(y=acceleration), size=1, alpha=0.25) +
     labs(x="Distance",
-         y=bquote("Acceleration (m\U00B7"*"s"^-1*")"),
+         y=bquote("Acceleration (m\U00B7"*"s"^-2*")"),
          subtitle = "Individual Data") +
     guides(fill = "none",
            color = "none") +
@@ -314,7 +314,7 @@ make_ind_classif_acceleration_plot <- function(data) {
     geom_line(aes(y=acceleration, group=interaction(id,trial)), size=0.75, alpha=0.5) +
     geom_point(aes(y=acceleration), size=1, alpha=0.25) +
     labs(x="Distance",
-         y=bquote("Acceleration (m\U00B7"*"s"^-1*")"),
+         y=bquote("Acceleration (m\U00B7"*"s"^-2*")"),
          subtitle = "Individual Data") +
     guides(fill = "none",
            color = "none") +
@@ -371,8 +371,8 @@ make_disability_acceleration_model_plot <- function(data, model) {
     scale_color_brewer(palette = "Dark2") +
     labs(
       subtitle = "Global grand mean and 95% credible interval (CI)",
-      x="Sprint Number",
-      y=bquote("Acceleration (m\U00B7"*"s"^-1*")"),
+      x="Distance",
+      y=bquote("Acceleration (m\U00B7"*"s"^-2*")"),
       color = "Disability", fill = "Disability") +
     theme_classic()
 
@@ -392,13 +392,147 @@ make_classif_acceleration_model_plot <- function(data, model) {
     scale_color_brewer(palette = "Dark2") +
     labs(
       subtitle = "Global grand mean and 95% credible interval (CI)",
-      x="Sprint Number",
-      y=bquote("Acceleration (m\U00B7"*"s"^-1*")"),
+      x="Distance",
+      y=bquote("Acceleration (m\U00B7"*"s"^-2*")"),
       color = "Classification", fill = "Classification") +
     theme_classic()
 
 }
 
+### Blood lactate
+
+# Get blood lactate data
+get_lactate_data <- function(file1, file2) {
+  data <- read.csv(file1, fileEncoding = 'UTF-8-BOM') %>%
+    left_join(
+      read.csv(file2, fileEncoding = 'UTF-8-BOM'),
+      by = c("Pre", "Post")
+    ) %>%
+    janitor::clean_names() %>%
+    select(disability, class, pre, post) %>%
+    rowid_to_column()
+
+
+  data$disability <- recode(data$disability,
+                            "Non_Sci" = "Other")
+
+  data_long <- pivot_longer(data, cols=4:5,
+                            names_to = "time",
+                            values_to = "lactate") %>%
+    mutate(time = case_when(
+      time == "pre" ~ 0,
+      time == "post" ~ 1
+    ),
+    class = as.factor(class))
+}
+
+# Blood lactate models for disability and classification
+fit_disability_lactate_model <- function(data) {
+
+  # run rstan quicker - for bayesian beta regression later on
+  rstan_options(auto_write = TRUE)
+  options(mc.cores = parallel::detectCores()-1)
+
+  disability_lactate_model <- brm(lactate ~ disability * time + (1 | rowid),
+                                       data = data,
+                                       seed = 1988,
+                                       chains = 4,
+                                       iter = 8000, warmup = 4000,
+                                       cores = 4
+  )
+}
+
+fit_classif_lactate_model <- function(data) {
+
+  # run rstan quicker - for bayesian beta regression later on
+  rstan_options(auto_write = TRUE)
+  options(mc.cores = parallel::detectCores()-1)
+
+  classif_lactate_model <- brm(lactate ~ class * time + (1 | rowid),
+                                    data = data,
+                                    seed = 1988,
+                                    chains = 4,
+                                    iter = 8000, warmup = 4000,
+                                    cores = 4
+  )
+}
+
+# Model plots i.e., global grand means and individual data
+
+make_disability_lactate_model_plot <- function(data, model) {
+  posterior_epred_draws <- crossing(rowid = unique(data$rowid),
+                                    disability = unique(data$disability),
+                                    time = unique(data$time)) %>%
+    add_epred_draws(model, re_formula = NA) %>%
+    mutate(time = case_when(
+      time == 0 ~ "pre",
+      time == 1 ~ "post"
+    ),
+    time = factor(time, levels = c("pre", "post")))
+
+  individual_data_plot <- data %>%
+    mutate(time = case_when(
+      time == 0 ~ "pre",
+      time == 1 ~ "post"
+    ),
+    time = factor(time, levels = c("pre", "post"))) %>%
+    ggplot(aes(x=time, color=disability)) +
+    geom_line(aes(y=lactate, group=rowid), size=0.75, alpha=0.5, position = position_dodge(width = -0.05)) +
+    stat_slabinterval(data = subset(posterior_epred_draws, time == "pre"),
+                      aes(y = .epred, color=disability, fill=disability),
+                      .width = .95, alpha = 0.5, position = position_dodge(width = -0.05),
+                      scale = 1, side = "left") +
+    stat_slabinterval(data = subset(posterior_epred_draws, time == "post"),
+                      aes(y = .epred, color=disability, fill=disability),
+                      .width = .95, alpha = 0.5, position = position_dodge(width = -0.05),
+                      scale = 1, side = "right") +
+    labs(x="Timepoint",
+         y=bquote("Blood Lactate (mmol\U00B7"~L^-1~")"),
+         subtitle = "Global grand mean and 95% credible interval (CI)\nIndividual data also shown",
+         color = "Disability", fill = "Disability") +
+    scale_fill_brewer(palette = "Set2") +
+    scale_color_brewer(palette = "Dark2") +
+    theme_classic()
+
+}
+
+make_classif_lactate_model_plot <- function(data, model) {
+  posterior_epred_draws <- crossing(rowid = unique(data$rowid),
+                                    class = unique(data$class),
+                                    time = unique(data$time)) %>%
+    add_epred_draws(model, re_formula = NA) %>%
+    mutate(time = case_when(
+      time == 0 ~ "pre",
+      time == 1 ~ "post"
+    ),
+    time = factor(time, levels = c("pre", "post")))
+
+  individual_data_plot <- data %>%
+    mutate(time = case_when(
+      time == 0 ~ "pre",
+      time == 1 ~ "post"
+    ),
+    time = factor(time, levels = c("pre", "post"))) %>%
+    ggplot(aes(x=time, color=class)) +
+    geom_line(aes(y=lactate, group=rowid), size=0.75, alpha=0.5, position = position_dodge(width = -0.05)) +
+    stat_slabinterval(data = subset(posterior_epred_draws, time == "pre"),
+                      aes(y = .epred, color=class, fill=class),
+                      .width = .95, alpha = 0.5, position = position_dodge(width = -0.05),
+                      scale = 1, side = "left") +
+    stat_slabinterval(data = subset(posterior_epred_draws, time == "post"),
+                      aes(y = .epred, color=class, fill=class),
+                      .width = .95, alpha = 0.5, position = position_dodge(width = -0.05),
+                      scale = 1, side = "right") +
+    labs(x="Timepoint",
+         y=bquote("Blood Lactate (mmol\U00B7"~L^-1~")"),
+         subtitle = "Global grand mean and 95% credible interval (CI)\nIndividual data also shown",
+         color = "Classification", fill = "Classification"
+         ) +
+    scale_fill_brewer(palette = "Set2") +
+    scale_color_brewer(palette = "Dark2") +
+    theme_classic()
+
+}
 
 ### General functions
 
@@ -427,7 +561,7 @@ make_pp_check <- function(model) {
 
 # Plotting
 
-combine_plots <- function(plot1, plot2, plot3, plot4, title1, title2, caption1, caption2) {
+combine_four_plots <- function(plot1, plot2, plot3, plot4, title1, title2, caption1, caption2) {
   p1 <- (plot1 / plot2) +
   plot_layout(guides = "collect") +
     plot_annotation(title = title1,
@@ -443,7 +577,27 @@ combine_plots <- function(plot1, plot2, plot3, plot4, title1, title2, caption1, 
                     tag_level = list(c("(C)", "(D)"))) &
     theme(plot.title = element_text(hjust = 0.5, face = "bold"), legend.position = 'bottom')
 
-  plot <- wrap_elements(p1) | wrap_elements(p2)
+  plot <- (wrap_elements(p1) | wrap_elements(p2))
+
+}
+
+combine_two_plots <- function(plot1, plot2, title1, title2, caption1, caption2) {
+  p1 <- (plot1) +
+    plot_layout(guides = "collect") +
+    plot_annotation(title = title1,
+                    caption = caption1,
+                    tag_level = "A",
+                    tag_prefix = "(", tag_suffix = ")") &
+    theme(plot.title = element_text(hjust = 0.5, face = "bold"), legend.position = 'bottom')
+
+  p2 <- (plot2) +
+    plot_layout(guides = "collect") +
+    plot_annotation(title = title2,
+                    caption = caption2,
+                    tag_level = list(c("(B)"))) &
+    theme(plot.title = element_text(hjust = 0.5, face = "bold"), legend.position = 'bottom')
+
+  plot <- (wrap_elements(p1) | wrap_elements(p2))
 
 }
 

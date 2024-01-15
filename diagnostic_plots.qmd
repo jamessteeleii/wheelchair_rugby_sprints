@@ -203,3 +203,68 @@ targets::tar_load(pp_check_classif_acceleration_model)
 pp_check_classif_acceleration_model
 
 ```
+
+# Blood Lactate Models
+## Disability Models
+### $\hat{R}$
+
+```{r,message=FALSE,warning=FALSE,echo=FALSE}
+
+targets::tar_load(rhat_plot_disability_lactate_model)
+
+rhat_plot_disability_lactate_model 
+
+
+```
+
+### Trace plots
+
+```{r,message=FALSE,warning=FALSE,echo=FALSE}
+
+targets::tar_load(trace_plot_disability_lactate_model)
+
+trace_plot_disability_lactate_model
+
+```
+
+### Posterior predictive check
+
+```{r,message=FALSE,warning=FALSE,echo=FALSE}
+
+targets::tar_load(pp_check_disability_lactate_model)
+
+pp_check_disability_lactate_model
+
+```
+
+## Classification Models
+### $\hat{R}$
+
+```{r,message=FALSE,warning=FALSE,echo=FALSE}
+
+targets::tar_load(rhat_plot_classif_lactate_model)
+
+rhat_plot_classif_lactate_model 
+
+
+```
+
+### Trace plots
+
+```{r,message=FALSE,warning=FALSE,echo=FALSE}
+
+targets::tar_load(trace_plot_classif_lactate_model)
+
+trace_plot_classif_lactate_model
+
+```
+
+### Posterior predictive check
+
+```{r,message=FALSE,warning=FALSE,echo=FALSE}
+
+targets::tar_load(pp_check_classif_lactate_model)
+
+pp_check_classif_lactate_model
+
+```
