@@ -1,0 +1,620 @@
+---
+articletitle: |
+ The Sprint and Repeated Sprint Ability of Recreational Fours and Fives Wheelchair Rugby Players
+format: 
+ sportrxiv-pdf:
+  include-in-header:
+   text: |
+    \usepackage[font=scriptsize]{caption}
+    \usepackage{lscape}
+    \newcommand{\blandscape}{\begin{landscape}}
+    \newcommand{\elandscape}{\end{landscape}}
+author:
+ - name: Chloe H. Maguire
+   affiliations:
+   - ref: 1
+   orcid: 0009-0003-3200-9149
+ - name: James Steele
+   affiliations:
+   - ref: 1
+   orcid: 0000-0002-8003-0757
+ - name: Lee Bridgeman
+   affiliations:
+   - ref: 1
+   orcid: 0000-0002-7605-4289
+   corresponding: true
+   email: lee.bridgeman@solent.ac.uk
+affiliations:
+   - id: 1
+     name: Department of Sport and Health, Solent University, UK
+abstract: |
+ Wheelchair rugby (WCR) is an indoor contact sport. The sport is commonly known for its paralympic discipline, WCR Fours. A more inclusive version of the sport, WCR Fives, was developed recently. Previously, it has been reported that sprint and repeated sprint (RS) ability are crucial for success in WCR. However, very little is known about the differences in these qualities between those playing WCR Fours and Fives, or between those with a spinal cord injury (SCI) and those without in recreational WCR players. However, very little is known about the differences in these qualities between those playing WCR Fours and Fives, or between those with a spinal cord injury (SCI) and those without, in recreational WCR players. Therefore, this study aimed to address these gaps in a non-elite sample of athletes. A total of 21 (17 males and four females) players (mean ± SD; age: 34.66 ± 12.34 years; mass: 76.23 ± 21.96 kg; stature: 1.76 ± 0.09 m) participated. This study measured velocity ($m·s^{-1}$) and acceleration ($m·s^{-2}$) with splits at 5, 10, 15, and 20m during three maximal 20m sprint efforts and timing splits during 10 x 20m RSs. Fours and Fives showed similar velocities and accelerations across all distances during the initial sprints. SCI participants had slower velocities and lower acceleration across all distances. However, there were interactions between disability and distance where although SCI participants had lower accelerations over the initial 0-5m distance, the difference decreased as the distance covered increased. During the RSs, similar performances across all distances and all sprint numbers were observed for Fours and Fives and SCI and non-SCI players. In conclusion, there appears to be little difference between Fours and Fives sprint and RS ability.
+license-type: ccby # change if neccessary
+# year: 2025 # defaults to current year
+# keywords: [psychological intervention, cumulative evidence, research waste] # optional
+# optional link to Supplementary Material:
+suppl-link: https://osf.io/y2jdb/
+reference-section-title: References
+printnote: "PREPRINT - NOT PEER REVIEWED" # if post print, include "POSTPRINT" then link to the published article
+bibliography: references.bib 
+pdf-engine: xelatex
+execute: 
+ echo: false
+ message: false
+ warning: false
+---
+
+```{r} 
+#| message: false
+#| warning: false
+#| echo: false
+#| include: false
+
+knitr::opts_chunk$set(echo = TRUE, fig.align="center")
+# options(knitr.kable.NA = '')
+# options(kableExtra.auto_format = FALSE)
+# options(knitr.table.format = "latex")
+
+library(tidyverse)
+library(kableExtra)
+library(ggtext)
+library(patchwork)
+
+```
+
+# Introduction
+Wheelchair rugby (WCR) is an indoor contact played on a rectangular court measuring 28 x 15m using a regulation volleyball [@rhodesActivityProfilesElite2015]. The sport was initially designed for wheelchair basketball (WB) players who found the sport too physically demanding and combines elements of rugby and basketball [@chuaWheelchairRugbyFast2010]. The ball must be thrown, passed, bumped, or dribbled in any direction between teammates every 10 seconds, and to score, the ball must be carried across the goal line, with both wheels crossing the opposition's goal line within 40 seconds of gaining possession [@goosey-tolfreyPhysiologyWheelchairSport2010]. The sport is commonly known for its original format and paralympic discipline, WCR Fours, where four players are on the court simultaneously, competing in four quarters of eight minutes [@rhodesActivityProfilesElite2015] with a two-minute break between quarters and five minutes for half-time [@brileyWheelchairRugbyPlayers2023]. The Paralympic discipline was initially aimed at tetraplegics (players with a spinal cord injury [SCI]) [@garcia-fresnedaInitialMaximumPushrim2019]. However, the sport now includes players with other disabilities such as cerebral palsy, muscular dystrophy, amputations, polio, and other neurological conditions [@garcia-fresnedaInitialMaximumPushrim2019]. A new version of the sport, WCR Fives, has been developed recently. This involves two 12-minute halves rather than quarters and has five players on the court simultaneously [@gbwrWheelchairRugbyFives2023]. This has allowed the sport to increase its inclusivity as the version opens it up to paraplegics and anyone with a physical impairment [@gbwrWheelchairRugbyFives2023; @wwrSport2023]. The eligibility for WCR Fives requires individuals to have a permanent physical impairment that significantly impairs the function of the upper or lower limbs to the extent that they cannot run, pivot, throw, catch or jump with sufficient speed, control, stability or endurance [@gbwrWheelchairRugbyFives2023].
+
+Both game formats have classification systems to regulate the level of influence that impairments have on games fairly, although the system's reliability has been questioned [@tweedyInternationalParalympicCommittee2011]. The system allocates athletes to a points classification representative of functional ability rather than athletic ability, which is decided by hand, arm, shoulder, and trunk function [@goosey-tolfreyPhysiologyWheelchairSport2010]. During international WCR Fours, players are classified (higher score = greater function) from 0.5 to 3.5 (domestically [GBWR] up to 4.0) [@haydonOvergroundpropulsionKinematicsAcceleration2018], and the total points on the court cannot exceed 8.0 points. For each female on the court, an additional 0.5 points are allocated to that team. During WCR Fives, the points system ranges from 0.5 (current 0.5-1.5 classified Fours players) to 4.0 (players with diagnosed pain-related impairment), and a team cannot exceed 10 points on the court at any one time (for a complete breakdown of the Fives points classification see [WCR Fives Eligibility Criteria](https://gbwr.org.uk/wp-content/uploads/2021/06/WR5s-Eligability-Criteria-June-2021-.pdf)). Current WCR research revolves around the paralympic discipline, and many of these studies categorise players into two groups based on their classification: high-point (HP) and low-point (LP) players. Those who are HP players (classification ≥ 2.0) tend to have better function and play a more offensive role in the sport, resulting in higher peak velocities than LP (classification ≤ 1.5) players [@bakatchinaPerformanceAsymmetryBiomechanical2021]. Players classified as LP also tend to play a more defensive role due to their lower functional ability, resulting in reduced wheelchair skills that stem from trunk instability [@goosey-tolfreyAerobicCapacityPeak2006].
+
+The sport of WCR is reported to be characterised by frequent and intermittent bouts of high-speed and sprint propulsion [@brileyWheelchairRugbyPlayers2023]. Consequently, the ability to rapidly accelerate and attain peak velocities has been identified as a determinant of on-court performance [@rhodesActivityProfilesElite2015; @janssenForceVelocityProfiling2023]. The ability to achieve greater peak velocities has also been reported to increase with the functional classification [@rhodesComparisonSpeedProfiles2017], with HP players spending more time performing high-speed activities than LP players [@rhodesEffectTeamRank2015]. In a study investigating sprint performance in a laboratory setting using a wheelchair ergometer, Goosey-Tolfrey et al. [-@goosey-tolfreySprintPerformancePropulsion2018] reported that HP players achieved a faster sprint time over 28m than LP players. This was reported to result from them achieving higher peak power outputs, resulting in greater acceleration and, thus, higher top speeds [@goosey-tolfreySprintPerformancePropulsion2018]. When examining sprinting kinematics, Haydon et al. [-@haydonOvergroundpropulsionKinematicsAcceleration2018] found differences in propulsion technique between players with differing activity limitations. The research highlighted above suggests a difference in sprint performance based on functional ability. However, at present, studies have yet to investigate the differences between the two formats of WCR.
+
+Despite work exploring the sprint ability of WCR players, there needs to be more exploring their repeated sprint (RS) ability. A study by Gee et al. [-@gee2020Repeated2018] investigated the effectiveness of a 20x20m RS field test to replicate the physical demands of WCR. The results showed a positive correlation between peak heart rate (HR) and blood lactate in the field test (r = 0.470, p = 0.043), as well as between peak HR and peak speed (r = 0.493, p = 0.031). A Bland-Altman analysis indicated good agreement between HR and blood lactate in the RS field test and gameplay. This led the authors to propose that the 20 x 20m RS field test is a valuable tool for assessing and monitoring training efficiency in WCR. However, like many studies, this was also based on an elite WCR sample (national team selection camp), and therefore, assessing the RS performance of a non-elite sample would be a valuable addition to the current literature.
+
+Presently, there needs to be more information on the sprint and RS performances of recreational WCR players, mainly if there are any differences between those playing the different versions of the game (Fours and Fives). Therefore, the primary aim of this study was to investigate the differences in sprint and RS ability between non-elite players competing in the different WCR game formats. The secondary aim was to examine the differences in sprint and RS ability between players with an SCI injury and those without.
+
+# Materials and Methods
+
+## Participants
+
+A purposive sampling approach was used to recruit participants from a recreational WCR club with diverse players from various game formats and classifications. A total of 21 (17 males and four females) non-elite players (mean ± SD; age: 34.66 ± 12.34 years; mass: 76.23 ± 21.96 kg; stature: 1.76 ± 0.09 m) participated in the study (breakdown of characteristics between player groupings is available in the supplementary files Table S1 [https://osf.io/e73zj](https://osf.io/e73zj)). Of the 12 Fours players, the points classifications of the players were as follows: 0.5 n = 1, 1.0 n = 1, 1.5 n = 1, 2.0 n = 3, 2.5 n = 2, 3.0 n = 3, 4.0 n = 1. Point classifications for the Fives were: 1.5 n = 3, 2.0 n = 2, 3.0 n = 2, 4.0 n = 2. Before commencing testing, all participants were fully informed about the procedures, possible risks, and purpose of the study. All participants also completed a PAR-Q form and provided informed written consent. The Solent University Health, Exercise, and Sport Science Ethics Committee approved this study. 
+
+## Procedures
+
+Testing took place over two sessions with a minimum of 48 hours rest between them, in the sports hall where the club usually train. The participant's chairs were a mix of personal and club chairs set to their preferences. A standardised warm-up was conducted before all testing sessions (Two court lengths, dynamic stretches of shoulders, trunk, and activation of the neck. Followed by 50% sprints from 90-degree turn x 2, 75% sprints from 180-degree turn x 1, and reaction pushes in all directions).
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| label: fig-schematic-plot 
+#| fig-cap: Schematic of study design.
+
+
+knitr::include_graphics(here::here("plots/Schematic.png"))
+
+```
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| label: fig-layout-plot 
+#| fig-cap: Layout of session one and session two testing.
+
+
+knitr::include_graphics(here::here("plots/Layout.png"))
+
+```
+
+### Session One – Initial Sprint Testing
+
+Session one (see @fig-schematic-plot and @fig-layout-plot) allowed for the measurement of time (secs), average velocity ($m.s^{-1}$) for each of the splits and overall average velocity ($m·s^{-1}$) and acceleration ($m·s^{-2}$) during three maximal 20m sprint efforts. Timing gates (SmartSpeed, Vald, Newstead, Australia) were used to record splits at 5, 10, 15 and 20m. Before commencing the test, a briefing was delivered, and any questions were addressed. Participants were then directed to position themselves 30cm behind the first timing gate (start gate) and instructed to complete each 20m sprint maximally when ready. After each sprint, participants were given a five-minute recovery period.
+
+### Session Two – Repeated Sprint Testing
+
+Session two measured RS ability during 10 x 20m [@westEffectsAbdominalBinding2014] maximal effort sprints (see @fig-schematic-plot and @fig-layout-plot). The selection of 10 RSs, as reported by West et al. [-@westEffectsAbdominalBinding2014] as opposed to 20 trials in Gee et al. [-@gee2020Repeated2018] study was chosen to reduce the overall demands on the participants and reflect their status as non-elite recreational WCR players. The same setup as session one was used to assess the time to complete each 20m sprint (splits as described previously). Blood lactate concentration (mM) was measured before starting the test and straight after the final sprint. The sample was taken from the ear lobe using a lancet and analysed using a Lactate Pro (Lactate Pro 2, Arkray Europe B.V., Netherlands). Before the 1st sprint, participants were instructed to complete each of the ten sprints maximally. When ready, the participants began their 1st sprint 30cm behind the start line before turning around at the other end (20m line), allowing the start line of the previous sprint to become the finish line of the next sprint. An auditory and a visual cue from the timing gates presented like a traffic light system informing participants when to begin the next sprint after a 15-second recovery period. This procedure continued until the 10th sprint, after which lactate concentration was assessed again. Verbal encouragement was given to all participants throughout, both from the team and the staff present.
+
+## Statistical Analysis
+
+The present analysis was not pre-registered as we had no a priori hypotheses and, given the limited sample size due to resource constraints and the population, thus was considered exploratory. Inferential statistics were treated as highly unstable local descriptions of the relations between model assumptions and data in order to acknowledge the inherent uncertainty in drawing generalised inferences from single and small samples [@amrheinInferentialStatisticsDescriptive2019a]. For all analyses we opted to avoid dichotomising the existence of effects and therefore did not employ traditional null hypothesis significance testing on parameter estimates [@amrheinScientistsRiseStatistical2019b; @mcshaneAbandonStatisticalSignificance2019a]. Instead, we opted to take an estimation-based approach instead [@cummingNewStatisticsWhy2014a], based within a Bayesian framework [@kruschkeBayesianNewStatistics2018a]. For all analyses model parameter estimates and their precision, along with conclusions based upon them, were interpreted continuously and probabilistically, considering data quality, plausibility of effect, and previous literature, all within the context of each model. We focused primarily on qualitative examination of our results based on visualization of the data and models for fixed effects, and exploration of variances using random effects. All analysis was performed in R (version 4.2.3, The R Foundation for Statistical Computing, 2023) and all data and code is presented in the supplementary materials [https://osf.io/y2jdb/](https://osf.io/y2jdb/). Two sets of models were employed exploring the sprint trial outcomes, and the repeated sprint outcomes, for both classification (4 vs 5) and disability (other vs SCI). The `brms` package [@burknerBrmsPackageBayesian2017a] was used to fit all models. All parameters in the models described below had $\hat{R}$ values $\leq{1.01}$, trace plots demonstrated chain convergence, and the posterior predictive checks appeared appropriate (see [https://osf.io/juex5](https://osf.io/juex5)). Given population and outcomes explored, the limited data available in past studies, and the model structures, we did not have a clear intuition or informed opinion about what priors to set and so opted to use the default weakly regularising priors and "let the data speak". Four Monte Carlo Markov Chains with 4000 warmup and 4000 sampling iterations were used in each model. For each model results were visualised by taking draws from the expected posterior distribution (n=16000) and taking the mean of these draws along with the 95% quantile (credible) interval for the fixed effects parameters, thus providing the overall grand mean effects for the population. All data visualisations were made using `ggplot2` [@wickhamGgplot2CreateElegant2022a], the `tidybayes` package [@kayTidybayesTidyData2022], and the `patchwork` package [@pedersenPatchworkComposerPlots2022a].
+
+### Sprint trial outcomes
+
+For the sprint trials we examined both the velocities and accelerations over each of the 5m sections of the 20m sprint as dependent variables in separate models. Data was handled in long format with each row corresponding to an observation of a participants velocity or acceleration in a 5m section for a given trial. For each of velocity and acceleration we fit separate models with fixed effects for either disability or classification, and in each also included a fixed effect for the distance (i.e., section of the 20m sprint trial: 0-5m, 5-10m, 10-15m, 15-20m), in addition to their interaction. We also used included random intercepts for participant and random slopes for distance. The model equation was, where $outcome_{i}$ was $velocity_{i}$ or $acceleration_{i}$, and $group_{diff}$ was either $disability_{SCI}$ or $classification_{5}$, thus:
+
+$$
+\scriptsize
+\begin{aligned}
+ \operatorname{outcome}_{i} &\sim N \left(\mu, \sigma^2 \right) \\
+  \mu &=\alpha_{j[i]} + \beta_{1j[i]}(\operatorname{distance}_{\operatorname{5-10m}}) + \beta_{2j[i]}(\operatorname{distance}_{\operatorname{10-15m}}) + \beta_{3j[i]}(\operatorname{distance}_{\operatorname{15-20m}}) \\  
+\left(
+ \begin{array}{c} 
+  \begin{aligned}
+   &\alpha_{j} \\
+   &\beta_{1j} \\
+   &\beta_{2j} \\
+   &\beta_{3j}
+  \end{aligned}
+ \end{array}
+\right)
+ &\sim N \left(
+\left(
+ \begin{array}{c} 
+  \begin{aligned}
+   &\gamma_{0}^{\alpha} + \gamma_{1}^{\alpha}(\operatorname{group}_{\operatorname{diff}}) \\
+   &\gamma^{\beta_{1}}_{0} + \gamma^{\beta_{1}}_{1}(\operatorname{group}_{\operatorname{diff}}) \\
+   &\gamma^{\beta_{2}}_{0} + \gamma^{\beta_{2}}_{1}(\operatorname{group}_{\operatorname{diff}}) \\
+   &\gamma^{\beta_{3}}_{0} + \gamma^{\beta_{3}}_{1}(\operatorname{group}_{\operatorname{diff}})
+  \end{aligned}
+ \end{array}
+\right)
+, 
+\left(
+ \begin{array}{cccc}
+   \sigma^2_{\alpha_{j}} & \rho_{\alpha_{j}\beta_{1j}} & \rho_{\alpha_{j}\beta_{2j}} & \rho_{\alpha_{j}\beta_{3j}} \\ 
+   \rho_{\beta_{1j}\alpha_{j}} & \sigma^2_{\beta_{1j}} & \rho_{\beta_{1j}\beta_{2j}} & \rho_{\beta_{1j}\beta_{3j}} \\ 
+   \rho_{\beta_{2j}\alpha_{j}} & \rho_{\beta_{2j}\beta_{1j}} & \sigma^2_{\beta_{2j}} & \rho_{\beta_{2j}\beta_{3j}} \\ 
+   \rho_{\beta_{3j}\alpha_{j}} & \rho_{\beta_{3j}\beta_{1j}} & \rho_{\beta_{3j}\beta_{2j}} & \sigma^2_{\beta_{3j}}
+ \end{array}
+\right)
+ \right)
+  \text{, for id j = 1,} \dots \text{,J}
+\end{aligned}
+$$
+
+
+### Repeated sprint trial outcomes
+
+For the repeated sprint trials we examined the time in seconds for each of the 5m sections of the 20m sprint as a dependent variable. Data was handled in long format with each row corresponding to an observation of a participants time for a 5m section for a given sprint number. We fit separate models with fixed effects for either disability or classification, and in each also included a fixed effect for the distance (i.e., section of the 20m sprint trial: 0-5m, 5-10m, 10-15m, 15-20m) and also for the sprint number (from first to tenth), in addition to their interactions. We also used included random intercepts for participant and random slopes for both distance and sprint number. The model equation was, where $group_{diff}$ was either $disability_{SCI}$ or $classification_{5}$, thus:
+
+$$
+\tiny
+\begin{aligned}
+ \operatorname{time}_{i} &\sim N \left(\mu, \sigma^2 \right) \\
+  \mu &=\alpha_{j[i]} + \beta_{1j[i]}(\operatorname{sprint\_number}) + \beta_{2j[i]}(\operatorname{distance}_{\operatorname{5-10m}}) + \beta_{3j[i]}(\operatorname{distance}_{\operatorname{10-15m}})\ + \\
+&\quad \beta_{4j[i]}(\operatorname{distance}_{\operatorname{15-20m}}) + \beta_{5}(\operatorname{distance}_{\operatorname{5-10m}} \times \operatorname{sprint\_number}) + \beta_{6}(\operatorname{distance}_{\operatorname{10-15m}} \times \operatorname{sprint\_number}) + \beta_{7}(\operatorname{distance}_{\operatorname{15-20m}} \times \operatorname{sprint\_number}) \\  
+\left(
+ \begin{array}{c} 
+  \begin{aligned}
+   &\alpha_{j} \\
+   &\beta_{1j} \\
+   &\beta_{2j} \\
+   &\beta_{3j} \\
+   &\beta_{4j}
+  \end{aligned}
+ \end{array}
+\right)
+ &\sim N \left(
+\left(
+ \begin{array}{c} 
+  \begin{aligned}
+   &\gamma_{0}^{\alpha} + \gamma_{1}^{\alpha}(\operatorname{group}_{\operatorname{diff}}) \\
+   &\gamma^{\beta_{1}}_{0} + \gamma^{\beta_{1}}_{1}(\operatorname{group}_{\operatorname{diff}}) \\
+   &\gamma^{\beta_{2}}_{0} + \gamma^{\beta_{2}}_{1}(\operatorname{group}_{\operatorname{diff}}) + \gamma^{\beta_{2}}_{2}(\operatorname{group}_{\operatorname{diff}} \times \operatorname{sprint\_number}) \\
+   &\gamma^{\beta_{3}}_{0} + \gamma^{\beta_{3}}_{2}(\operatorname{group}_{\operatorname{diff}}) + \gamma^{\beta_{3}}_{1}(\operatorname{group}_{\operatorname{diff}} \times \operatorname{sprint\_number}) \\
+   &\gamma^{\beta_{4}}_{0} + \gamma^{\beta_{4}}_{1}(\operatorname{group}_{\operatorname{diff}}) + \gamma^{\beta_{4}}_{2}(\operatorname{group}_{\operatorname{diff}} \times \operatorname{sprint\_number})
+  \end{aligned}
+ \end{array}
+\right)
+, 
+\left(
+ \begin{array}{ccccc}
+   \sigma^2_{\alpha_{j}} & \rho_{\alpha_{j}\beta_{1j}} & \rho_{\alpha_{j}\beta_{2j}} & \rho_{\alpha_{j}\beta_{3j}} & \rho_{\alpha_{j}\beta_{4j}} \\ 
+   \rho_{\beta_{1j}\alpha_{j}} & \sigma^2_{\beta_{1j}} & \rho_{\beta_{1j}\beta_{2j}} & \rho_{\beta_{1j}\beta_{3j}} & \rho_{\beta_{1j}\beta_{4j}} \\ 
+   \rho_{\beta_{2j}\alpha_{j}} & \rho_{\beta_{2j}\beta_{1j}} & \sigma^2_{\beta_{2j}} & \rho_{\beta_{2j}\beta_{3j}} & \rho_{\beta_{2j}\beta_{4j}} \\ 
+   \rho_{\beta_{3j}\alpha_{j}} & \rho_{\beta_{3j}\beta_{1j}} & \rho_{\beta_{3j}\beta_{2j}} & \sigma^2_{\beta_{3j}} & \rho_{\beta_{3j}\beta_{4j}} \\ 
+   \rho_{\beta_{4j}\alpha_{j}} & \rho_{\beta_{4j}\beta_{1j}} & \rho_{\beta_{4j}\beta_{2j}} & \rho_{\beta_{4j}\beta_{3j}} & \sigma^2_{\beta_{4j}}
+ \end{array}
+\right)
+ \right)
+  \text{, for id j = 1,} \dots \text{,J}
+\end{aligned}
+$$
+
+We also examined the blood lactate pre- and post-repeated sprint trials as a dependent variable. Data was handled in long format with each row corresponding to an observation of a participants blood lactate at either pre- or post-repeated sprint trials. We fit separate models with fixed effects for either disability or classification, and in each also included a fixed effect for the time-point (i.e., pre- or post-repeated sprint trials coded as pre=0 and post=1), in addition to their interaction. We also used included random intercepts for participant. The model equation was, where $group_{diff}$ was either $disability_{SCI}$ or $classification_{5}$, thus:
+
+$$
+\small
+\begin{aligned}
+ \operatorname{lactate}_{i} &\sim N \left(\alpha_{j[i]} + \beta_{1}(\operatorname{time}), \sigma^2 \right) \\
+  \alpha_{j} &\sim N \left(\gamma_{0}^{\alpha} + \gamma_{1}^{\alpha}(\operatorname{group}_{\operatorname{diff}}) + \gamma_{2}^{\alpha}(\operatorname{group}_{\operatorname{diff}} \times \operatorname{time}), \sigma^2_{\alpha_{j}} \right)
+  \text{, for id j = 1,} \dots \text{,J}
+\end{aligned}
+$$
+
+# Results
+## Within Session Reliability 
+During the initial sprints, the within-session reliability of each 5m split was calculated: 5m (Coefficient of Variation [CV] = 2.1%, Intraclass Correlation Coefficient [ICC] = 0.82), 10m (CV = 1.8%, ICC = 0.91), 15m (CV = 1.9%, ICC = 0.92) and 20m (CV = 1.6%, ICC = 0.95). All CVs and ICCs were calculated using Hopkins [-@hopkinsSpreadsheetsAnalysisValidity2017] reliability spreadsheet.
+
+```{r} 
+#| message: false
+#| warning: false
+#| echo: false
+
+targets::tar_load(tidy_disability_velocity_model)
+targets::tar_load(tidy_classif_velocity_model)
+targets::tar_load(tidy_disability_acceleration_model)
+targets::tar_load(tidy_classif_acceleration_model)
+
+disability_tab <- left_join(tidy_disability_velocity_model, tidy_disability_acceleration_model,
+             by = c("effect", "term")) %>%
+ select(term, estimate.x, conf.low.x, conf.high.x, estimate.y, conf.low.y, conf.high.y)
+
+classif_tab <- left_join(tidy_classif_velocity_model, tidy_classif_acceleration_model,
+              by = c("effect", "term")) %>%
+ select(term, estimate.x, conf.low.x, conf.high.x, estimate.y, conf.low.y, conf.high.y)
+
+
+tidy_model_sprint <- rbind(disability_tab, classif_tab) %>%
+ mutate_if(is.numeric, round, 2)
+
+
+tidy_model_sprint$term <- recode(tidy_model_sprint$term,
+               "(Intercept)" = "Intercept",
+               "disabilitySCI" = "$Disability_{SCI}$",
+               "distance5M10m" = "$Distance_{5-10m}$",
+               "distance10M15m" = "$Distance_{10-15m}$",
+               "distance15M20m" = "$Distance_{15-20m}$",
+               "disabilitySCI:distance5M10m" = "$Disability_{SCI}$:$Distance_{5-10m}$",
+               "disabilitySCI:distance10M15m" = "$Disability_{SCI}$:$Distance_{10-15m}$",
+               "disabilitySCI:distance15M20m" = "$Disability_{SCI}$:$Distance_{15-20m}$",
+               "sd__(Intercept)" = "$\\sigma_{Intercept}$", 
+               "sd__distance5M10m" = "$\\sigma_{distance5M10m}$",
+               "sd__distance10M15m" = "$\\sigma_{distance10M15m}$",
+               "sd__distance15M20m" = "$\\sigma_{distance15M20m}$",
+               "cor__(Intercept).distance5M10m" = "$\\rho_{Intercept:Distance_{5-10m}}$",
+               "cor__(Intercept).distance10M15m" = "$\\rho_{Intercept:Distance_{10-15m}}$",
+               "cor__(Intercept).distance15M20m" = "$\\rho_{Intercept:Distance_{15-20m}}$",
+               "cor__distance5M10m.distance10M15m" = "$\\rho_{Distance_{5-10m}:Distance_{10-15m}}$",
+               "cor__distance5M10m.distance15M20m" = "$\\rho_{Distance_{5-10m}:Distance_{15-20m}}$",
+               "cor__distance10M15m.distance15M20m" = "$\\rho_{Distance_{10-15m}:Distance_{15-20m}}$",
+               "sd__Observation" = "$\\sigma_{Residual}$",
+               
+               "classif5" = "$Classification_{5}$",
+               "classif5:distance5M10m" = "$Classification_{5}$:$Distance_{5-10m}$",
+               "classif5:distance10M15m" = "$Classification_{5}$:$Distance_{10-15m}$",
+               "classif5:distance15M20m" = "$Classification_{5}$:$Distance_{15-20m}$"
+               )
+
+tidy_model_sprint <- tidy_model_sprint[c(1:14,16,15,17:33,35,35,36:38),]
+```
+
+```{r} 
+#| message: false
+#| warning: false
+#| echo: false
+
+targets::tar_load(tidy_disability_rsa_model)
+targets::tar_load(tidy_classif_rsa_model)
+
+tidy_model_rsa <- rbind(tidy_disability_rsa_model,
+             tidy_classif_rsa_model) %>%
+ select(term, estimate, conf.low, conf.high) %>%
+ mutate_if(is.numeric, round, 2)
+
+
+tidy_model_rsa$term <- recode(tidy_model_rsa$term,
+               "(Intercept)" = "Intercept",
+               "disabilitySCI" = "$Disability_{SCI}$",
+               "sprint_number" = "Sprint Number",
+               "distance5M10m" = "$Distance_{5-10m}$",
+               "distance10M15m" = "$Distance_{10-15m}$",
+               "distance15M20m" = "$Distance_{15-20m}$",
+               "disabilitySCI:sprint_number" = "$Disability_{SCI}$:Sprint Number",
+               "disabilitySCI:distance5M10m" = "$Disability_{SCI}$:$Distance_{5-10m}$",
+               "disabilitySCI:distance10M15m" = "$Disability_{SCI}$:$Distance_{10-15m}$",
+               "disabilitySCI:distance15M20m" = "$Disability_{SCI}$:$Distance_{15-20m}$",
+               "sprint_number:distance5M10m" = "Sprint Number:$Distance_{5-10m}$",
+               "sprint_number:distance10M15m" = "Sprint Number:$Distance_{10-15m}$",
+               "sprint_number:distance15M20m" = "Sprint Number:$Distance_{15-20m}$",
+               "disabilitySCI:sprint_number:distance5M10m" = "$Disability_{SCI}$:Sprint Number:$Distance_{5-10m}$",
+               "disabilitySCI:sprint_number:distance10M15m" = "$Disability_{SCI}$:Sprint Number:$Distance_{10-15m}$",
+               "disabilitySCI:sprint_number:distance15M20m" = "$Disability_{SCI}$:Sprint Number:$Distance_{15-20m}$",
+               
+               "sd__(Intercept)" = "$\\sigma_{Intercept}$", 
+               "sd__sprint_number" = "$\\sigma_{Sprint Number}$",
+               "sd__distance5M10m" = "$\\sigma_{distance5M10m}$",
+               "sd__distance10M15m" = "$\\sigma_{distance10M15m}$",
+               "sd__distance15M20m" = "$\\sigma_{distance15M20m}$",
+               
+               "cor__(Intercept).sprint_number" = "$\\rho_{Intercept:Sprint Number}$",
+               "cor__(Intercept).distance5M10m" = "$\\rho_{Intercept:Distance_{5-10m}}$",
+               "cor__(Intercept).distance10M15m" = "$\\rho_{Intercept:Distance_{10-15m}}$",
+               "cor__(Intercept).distance15M20m" = "$\\rho_{Intercept:Distance_{15-20m}}$",
+               
+               "cor__sprint_number.distance10M15m" = "$\\rho_{Sprint Number:Distance_{10-15m}}$",
+               "cor__sprint_number.distance5M10m" = "$\\rho_{Sprint Number:Distance_{5-10m}}$",
+               "cor__sprint_number.distance15M20m" = "$\\rho_{Sprint Number:Distance_{15-20m}}$",
+               
+               
+               "cor__distance5M10m.distance10M15m" = "$\\rho_{Distance_{5-10m}:Distance_{10-15m}}$",
+               "cor__distance5M10m.distance15M20m" = "$\\rho_{Distance_{5-10m}:Distance_{15-20m}}$",
+               "cor__distance10M15m.distance15M20m" = "$\\rho_{Distance_{10-15m}:Distance_{15-20m}}$",
+               "sd__Observation" = "$\\sigma_{Residual}$",
+               
+               "classif5" = "$Classification_{5}$",
+               "classif5:sprint_number" = "$Classification_{5}$:Sprint Number",
+               "classif5:distance5M10m" = "$Classification_{5}$:$Distance_{5-10m}$",
+               "classif5:distance10M15m" = "$Classification_{5}$:$Distance_{10-15m}$",
+               "classif5:distance15M20m" = "$Classification_{5}$:$Distance_{15-20m}$",
+               "classif5:sprint_number:distance5M10m" = "$Classification_{5}$:Sprint Number:$Distance_{5-10m}$",
+               "classif5:sprint_number:distance10M15m" = "$Classification_{5}$:Sprint Number:$Distance_{10-15m}$",
+               "classif5:sprint_number:distance15M20m" = "$Classification_{5}$:Sprint Number:$Distance_{15-20m}$",
+               
+               )
+
+tidy_model_rsa <- tidy_model_rsa[c(1:21,22,23,25,28,24,26,29,27,30:55,57,60,56,58,61,59,62:64),]
+```
+
+```{r} 
+#| message: false
+#| warning: false
+#| echo: false
+
+targets::tar_load(tidy_disability_lactate_model)
+targets::tar_load(tidy_classif_lactate_model)
+
+tidy_model_lactate <- rbind(tidy_disability_lactate_model,
+             tidy_classif_lactate_model) %>%
+ select(term, estimate, conf.low, conf.high) %>%
+ mutate_if(is.numeric, round, 2)
+
+
+tidy_model_lactate$term <- recode(tidy_model_lactate$term,
+               "(Intercept)" = "Intercept",
+               "disabilitySCI" = "$Disability_{SCI}$",
+               "time" = "Time",
+               "disabilitySCI:time" = "$Disability_{SCI}$:Time",
+               
+               "sd__(Intercept)" = "$\\sigma_{Intercept}$", 
+               "sd__Observation" = "$\\sigma_{Residual}$",
+               
+               "class5" = "$Classification_{5}$",
+               "class5:time" = "$classication_{5}$:Time"
+               )
+
+```
+
+## Sprint trial outcomes
+
+The overall grand means and credible intervals from the models for the fixed effects (i.e., without including the random effects) for both velocity and acceleration can be seen in @fig-velocity-model-plot and @fig-acceleration-model-plot, in addition to individual data, respectively for both disability and classification models. All parameters for both outcomes and both disability and classification models are also shown in @tbl-sprint-model. As might be expected, fixed effects in both models revealed that velocity increased as distance covered increased and the reverse pattern for acceleration which decreased as distance covered increased. Random effects in both models showed that variation in velocities increased with increasing distance covered, and also the random effects correlations suggested that those who were initially faster, or faster during certain sections of the sprint, were similarly typically faster at all other distances. Variance in acceleration was more similar over increasing distance covered as compared with velocity, and also the random effects correlations suggested that those who had initially higher acceleration showed greater declines in acceleration across all distances, though between adjacent distances there were more positive relationships. 
+
+### Disability
+SCI participants showed slower velocities across all distances. There was however little interaction effect between disability and distance upon velocity. SCI participants also had lower acceleration across all distances. However, there were interactions between disability and distance whereby although over the initial 0-5m distance SCI participants had lower accelerations, the difference between them and participants with other injuries decreased as distance covered increased. During the final 10-15 and 15-20m accelerations were similar between groups. 
+
+### Classification
+Both 4s and 5s showed similar velocities across all distances, as well as accelerations. There was little effect of classification upon either velocity or acceleration. 
+
+```{r} 
+#| message: false
+#| warning: false
+#| echo: false
+#| label: tbl-sprint-model 
+#| tbl-cap-location: "top"
+#| tbl-cap: Model parameter estimates for both fixed and random effects for sprint trial outcomes (velocity and acceleration).
+
+kbl(
+ tidy_model_sprint,
+ align = c("l","c","c","c","c","c","c"),
+ col.names = c("Model Term",
+        "Estimate",
+        "Lower 95\\% CI",
+        "Upper 95\\% CI",
+        "Estimate",
+        "Lower 95\\% CI",
+        "Upper 95\\% CI"
+        ),
+ escape = FALSE, 
+ booktabs = TRUE
+ ) %>%
+ footnote(general = c("CI = credible interval")
+      ) %>%
+ row_spec(0, bold = TRUE) %>%
+ kable_classic(full_width = FALSE) %>%
+ add_header_above(c(" ", "Velocity $(m\U00B7s^{-1})$" = 3, "Acceleration $(m\U00B7s^{-2})$" = 3),
+                  escape = FALSE) %>%
+ pack_rows("Disability Model", 1,19) %>%
+ pack_rows("Fixed Effects", 1,8, italic = TRUE, bold = FALSE) %>%
+ pack_rows("Random Effects", 9,19, italic = TRUE, bold = FALSE) %>%
+ pack_rows("Classification Model", 20,38) %>%
+ pack_rows("Fixed Effects", 20,27, italic = TRUE, bold = FALSE) %>%
+ pack_rows("Random Effects", 28,38, italic = TRUE, bold = FALSE) %>%
+  kable_styling(latex_options = "scale_down")
+
+```
+
+
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| label: fig-velocity-model-plot 
+#| fig-width: 15
+#| fig-height: 7.5
+#| fig-cap: Individual data (top row) and global grand means with distribution and 95% credible interval estimates from the expectation of the posterior predictive distribution (bottom row) for velocity by both disability, panels (A) and (B), and classification, panels (C) and (D).
+
+targets::tar_load(combined_velocity_plot)
+
+combined_velocity_plot
+
+```
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| label: fig-acceleration-model-plot 
+#| fig-width: 15
+#| fig-height: 7.5
+#| fig-cap: Individual data (top row) and global grand means with distribution and 95% credible interval estimates from the expectation of the posterior predictive distribution (bottom row) for acceleration by both disability, panels (A) and (B), and classification, panels (C) and (D).
+
+targets::tar_load(combined_acceleration_plot)
+
+combined_acceleration_plot
+
+```
+
+## Repeated sprint trial outcomes
+
+### Sprint times
+
+The overall grand means and credible intervals from the models for the fixed effects (i.e., without including the random effects) for repeated sprint times can be seen in @fig-rsa-model-plot and @fig-acceleration-model-plot, in addition to individual data and participant level linear smooths, respectively for both disability and classification models. All parameters for both outcomes and both disability and classification models are also shown in @tbl-rsa-model.
+
+On average, fixed effects in both models revealed that sprint number had little impact on time, however did interact with distance revealing greater increases in time for later sprints over increasing distances. Sprint number had little impact upon the initial 0-5m. Of course, trivially, time increased as distance covered increased. Random effects in both models showed, similarly to velocity in the sprint trials, that variation in times increased with increasing distance covered. Also the random effects correlations suggested that those who were initially faster at the beginning of a sprint, faster during certain sections of the sprint, or faster during a given sprint number, were similarly typically faster at all other distances and during all other sprint numbers. 
+
+#### Disability
+Both SCI and other disabilities showed similar performances in the repeated sprints, across all distances, and all sprint numbers. There was little effect of disability upon either repeated sprint times.
+
+#### Classification
+Both 4s and 5s showed similar performances in the repeated sprints, across all distances, and all sprint numbers. There was little effect of classification upon either repeated sprint times.
+
+```{r} 
+#| message: false
+#| warning: false
+#| echo: false
+#| label: tbl-rsa-model 
+#| tbl-cap-location: "top"
+#| tbl-cap: Model parameter estimates for both fixed and random effects for repeated sprint trial times.
+
+
+kbl(
+ tidy_model_rsa,
+ align = c("l","c","c","c"),
+ col.names = c("Model Term",
+        "Estimate",
+        "Lower 95\\% CI",
+        "Upper 95\\% CI"
+       ),
+ escape = FALSE,
+ booktabs = TRUE
+) %>%
+ footnote(general = c("CI = credible interval")
+      ) %>%
+ row_spec(0, bold = TRUE) %>%
+ kable_classic(full_width = FALSE) %>%
+ add_header_above(c(" ", "Time (seconds)" = 3), 
+          escape = FALSE) %>%
+ pack_rows("Disability Model", 1,32) %>%
+ pack_rows("Fixed Effects", 1,16, italic = TRUE, bold = FALSE) %>%
+ pack_rows("Random Effects", 17,32, italic = TRUE, bold = FALSE) %>%
+ pack_rows("Classification Model", 33,64) %>%
+ pack_rows("Fixed Effects", 33,48, italic = TRUE, bold = FALSE) %>%
+ pack_rows("Random Effects", 49,64, italic = TRUE, bold = FALSE) %>%
+  kable_styling(font_size = 6)
+
+```
+
+
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| label: fig-rsa-model-plot 
+#| fig-width: 15
+#| fig-height: 7.5
+#| fig-cap: Individual data with linear smooths by participant (top row) and global grand means with distribution and 95% credible interval estimates from the expectation of the posterior predictive distribution (bottom row) for repeated sprint times by both disability, panels (A) and (B), and classification, panels (C) and (D).
+
+targets::tar_load(combined_rsa_plot)
+
+combined_rsa_plot
+
+```
+
+### Blood lactate
+The overall grand means and credible intervals from the models for the fixed effects (i.e., without including the random effects) for blood lactate can be seen in @fig-lactate-model-plot in addition to individual data, respectively for both disability and classification models. All parameters for both outcomes and both disability and classification models are also shown in @tbl-lactate-model. As might be expected, fixed effects in both models revealed that blood lactate increased as from pre- to post-repeated sprint trials (see $Time$ terms in @tbl-lactate-model). Random intercepts also showed some variation in baseline blood lactate levels. 
+
+### Disability
+There was little difference in average blood lactate levels between those with SCI or other disabilities, nor was there a clear interaction effect suggesting both groups increased in blood lactate similarly. 
+
+### Classification
+Both 4s and 5s showed similar average blood lactate levels too. However, the posterior estimates were suggestive of an interaction effect little effect of classification upon either velocity or acceleration whereby 5s tended to show a greater increase in blood lactate levels post-repeated sprint trials. 
+
+```{r} 
+#| message: false
+#| warning: false
+#| echo: false
+#| label: tbl-lactate-model 
+#| tbl-cap-location: "top"
+#| tbl-cap: Model parameter estimates for both fixed and random effects for blood lactate pre- and post-repeated sprint trials.
+
+
+kbl(
+ tidy_model_lactate,
+ align = c("l","c","c","c"),
+ col.names = c("Model Term",
+        "Estimate",
+        "Lower 95\\% CI",
+        "Upper 95\\% CI"
+       ),
+ escape = FALSE,
+ booktabs = TRUE
+) %>%
+ footnote(general = c("CI = credible interval")
+      ) %>%
+ row_spec(0, bold = TRUE) %>%
+ kable_classic(full_width = FALSE) %>%
+ add_header_above(c(" ", "Blood lactate $\\(mmol\U00B7L^{-1})$" = 3), 
+          escape = FALSE) %>%
+ pack_rows("Disability Model", 1,6) %>%
+ pack_rows("Fixed Effects", 1,4, italic = TRUE, bold = FALSE) %>%
+ pack_rows("Random Effects", 5,6, italic = TRUE, bold = FALSE) %>%
+ pack_rows("Classification Model", 7,12) %>%
+ pack_rows("Fixed Effects", 7,9, italic = TRUE, bold = FALSE) %>%
+ pack_rows("Random Effects", 11,12, italic = TRUE, bold = FALSE)
+
+```
+
+
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| label: fig-lactate-model-plot 
+#| fig-width: 15
+#| fig-height: 7.5
+#| fig-cap: Individual data with linear smooths by participant (top row) and global grand means with distribution and 95% credible interval estimates from the expectation of the posterior predictive distribution (bottom row) for repeated sprint times by both disability, panels (A) and (B), and classification, panels (C) and (D).
+
+targets::tar_load(combined_lactate_plot)
+
+combined_lactate_plot
+
+```
+
+# Discussion
+
+The study aimed to investigate the differences between WCR game formats during sprint and RS field-based testing in a non-elite sample of athletes. A secondary aim was to examine the differences in SCI and Non-SCI WCR sprint and RS performance. The main findings of this study are that there was little difference in either sprint (see @fig-velocity-model-plot, @fig-acceleration-model-plot, and Table S2 [https://osf.io/s4ptw](https://osf.io/s4ptw)) or RS performance (see @fig-rsa-model-plot and Table S3 [https://osf.io/pwdj3](https://osf.io/pwdj3)) between the players competing in the two different game formats. When examining disability in the sprints, participants with an SCI showed slower accelerations and velocities across all distances (see @fig-velocity-model-plot, @fig-acceleration-model-plot, and Table S2 [https://osf.io/s4ptw](https://osf.io/s4ptw)). However, it is worth noting that the acceleration difference between participants with an SCI and those without decreased progressively as the distance covered increased as they neared their respective max velocities (i.e., little acceleration was occurring anyway). There was little difference in performance between SCI and non-SCI participants during the RS testing (see @fig-rsa-model-plot and Table S3 [https://osf.io/pwdj3](https://osf.io/pwdj3)).
+
+This is the first study investigating the sprint and RS performance differences between WCR formats. When the Fives format was created, a new classification system was needed to differentiate between the two formats. The Fives format opens the sport to a more diverse group of participants but has also resulted in an overlap between players who can compete in both formats. Currently, players competing in the Great Britain Wheelchair Rugby (GBWR) Fives competition are classified on a self-declaration basis, with the team coach deciding which classification players best fit into [@gbwrWheelchairRugbyFives2023]. Fours players who are currently classified as 0.5-1.5 based on the International Wheelchair Rugby Federation (IWRF) guidelines are eligible to compete as 0.5 classified Fives, 2.0-3.5 IWRF are classified as 1.0 in Fives, and 4.0 IWRF compete as 1.5 classified Fives players [@gbwrWheelchairRugbyFives2023]. A player with impairment in both lower limbs, one lower limb (unable to stand or walk unassisted) or a pain-related impairment is classified as 2.0, 3.0 and 4.0, respectively, in WCR Fives [@gbwrWheelchairRugbyFives2023]. In this study, six of the nine Fives players would not be eligible to compete in the Fours format (based on disability), and three would be classified as 4.0 (highest function). Previous research has identified differences in WCR rugby performance between LP and HP players [@rhodesActivityProfilesElite2015; @rhodesComparisonSpeedProfiles2017; @rhodesEffectTeamRank2015; @goosey-tolfreySprintPerformancePropulsion2018], with HP players achieving better acceleration and peak velocity results [@rhodesActivityProfilesElite2015; @rhodesEffectTeamRank2015; @goosey-tolfreyFieldbasedPhysiologicalTesting2013]. We found little difference between the sprint and RS performance of the Fours and Fives in this current study. Most previous research has been conducted with elite WCR rather than recreational players. Therefore, these prior results should not necessarily be generalised to recreational players. It is also speculated that the Fours players in this study have more experience using their wheelchairs both in everyday living and when playing sports, and therefore, although overall, they may have less functionality than the Fives players, they are more accustomed to using their chairs and may have these customised to optimise their own performance.
+
+The results of this current study, in agreement with previous research, found a clear difference in sprint performance based on functional classification [@rhodesActivityProfilesElite2015; @rhodesEffectTeamRank2015; @goosey-tolfreyFieldbasedPhysiologicalTesting2013], with Non-SCI players demonstrating faster velocities across all measured distances. These differences have been proposed to be related to the superior trunk function of higher-classification players [@rhodesActivityProfilesElite2015; @vanlandewijckEvidencebasedClassificationWheelchair2011]. Superior trunk function is suggested to allow the higher classified players to apply more hand-rim force, which is a prerequisite for successful sprint performance [@vanlandewijckEvidencebasedClassificationWheelchair2011]. In support of this, Garcia-Fresneda et al. [-@garcia-fresnedaInitialMaximumPushrim2019] found significant and large associations between the mechanical outputs during an initial maximum push-rim propulsion test (single push on the wheelchair rim from a stationary position) and mean acceleration, maximum acceleration and 12m wheeling performance. The relationship between force and power from the test was also found to be significant and large with maximum velocity over 12m [@garcia-fresnedaInitialMaximumPushrim2019]. Therefore, it is proposed that the reduced trunk function of the SCI WCR players in this study may have contributed to the reduction in maximal velocity observed.
+
+Acceleration is also considered one of the crucial aspects of WCR [@goosey-tolfreySprintPerformancePropulsion2018] performance; therefore, investigating the differences between SCI and Non-SCI recreational WCR players is of interest. In this current study, the players with an SCI were found to have reduced acceleration profiles compared to the Non-SCI players. When investigating acceleration in elite WCR players Haydon et al. [-@haydonOvergroundpropulsionKinematicsAcceleration2018] found HP players used a greater proportion of push through their stroke than the LP, who used a great pull. This was suggested to be due to HP having greater trunk function, leading to an increase in release angle and a decrease in stroke angle, resulting in increased acceleration for the third stroke [@haydonOvergroundpropulsionKinematicsAcceleration2018]. In a further study by Goosey-Tolfrey et al. [-@goosey-tolfreySprintPerformancePropulsion2018], the authors reported that HP players achieved faster sprint times (~15%) over 29m compared to LP players. This was attributed to the HP players achieving higher peak power outputs, which resulted in greater acceleration and, therefore, greater peak velocities [@goosey-tolfreySprintPerformancePropulsion2018]. It should be noted, however, that the high standard deviations reported show there was considerable heterogeneity within the two groups, with some LP players being faster than some HP players [@goosey-tolfreySprintPerformancePropulsion2018]. This led Goosey-Tolfrey et al. [-@goosey-tolfreySprintPerformancePropulsion2018] to conclude that training status, technical experience, wheelchair configuration, and total mass of the wheelchair user may also contribute to differences in sprint performance.
+
+In this study, due to the recreational nature of the players, not all of the participants had their own WCR chairs, and some players were using club chairs, which were not individualised to them, which may have also affected performance. Previously, it has been suggested that the wheelchair configuration [@vanlandewijckEvidencebasedClassificationWheelchair2011] and abdominal binding can significantly alter some aspects of the WCR performance [@westEffectsAbdominalBinding2014]. In their study, West et al. [-@westEffectsAbdominalBinding2014] reported in athletes with cervical SCI, the use of abdominal binding resulted in a decrease in time to complete an acceleration/deceleration test and an increase in distance covered during a repeated four-minute push test. The authors partially attributed these improvements in WCR-related performance to improvements in trunk stability [@westEffectsAbdominalBinding2014]. It has also been reported that athletes who adopt a deeper seating position have reduced trunk range of motion on the first push and display a more upright position during subsequent pushes, reducing their ability to accelerate from a standstill [@vanlandewijckEvidencebasedClassificationWheelchair2011]. It is suggested that there is a complex interplay between the player and the wheelchair, which can influence performance [@vanlandewijckEvidencebasedClassificationWheelchair2011; @bakatchinaEffectRepeatedOnfield2023]. Thus, WCR players may benefit from having their wheelchairs and personal equipment set up individually optimised. However, while this level of individualisation may be optimal for performance, it is expensive and may be unrealistic for recreational players who must buy their equipment. 
+
+As with the sprint test, there was little difference in the RS performance between the Fours and Fives. There was also little difference found between Non-SCI and SCI players. The fastest average 20m times of the recreational players in this current study were slower than the times reported for unbound Great Britain WCR players (10 x 20m) by West et al. [-@westEffectsAbdominalBinding2014] (6.38 ± 0.55s Vs 6.64 ± 0.44s [Fives] and 6.64 ± 0.70s [Non-SCI]). A further study by Gee et al. [-@gee2020Repeated2018] investigated RS in WCR players during an international training camp. They reported that, on average, the LP players took 7.93 ± 0.83s and the HP players 6.50 ± 0.06s to complete the 20 x 20m sprints. In this study, both the Fours and Fives (7.06 ± 0.87s and 7.09 ± 0.62s, respectively) and SCI and Non-SCI players (7.07 ± 0.61s and 7.07 ± 0.91s, respectively) were faster than the LP players in Gee et al. [-@gee2020Repeated2018] study but slower than the HP players. It should be noted that in this previous study, the players completed 20 shuttles as opposed to 10 in this current study, but in agreement with that study, there was a large range of times across all distances due to the heterogeneity of the players in this sample (Table S3 [https://osf.io/pwdj3](https://osf.io/pwdj3)). Regarding the lactate values, the Fours and SCI (6.96 ± 2.05 $mmol\cdot L^{-1}$ and 7.30 ± 2.41 $mmol\cdot L^{-1}$ respectively) had lower peak values and the Fives and Non-SCI had similar peak values (8.84 ± 3.49 $mmol\cdot L^{-1}$ and 8.16 ± 3.21 $mmol\cdot L^{-1}$ respectively) compared to Gee et al. [-@gee2020Repeated2018] (8.5 ± 3.5 $mmol\cdot L^{-1}$). The lactate values Gee et al. [-@gee2020Repeated2018] reported during the RSs showed good agreement between those experienced during gameplay. This led them to conclude that good agreement between physiological indices collected during RS testing and game play may allow a RS test to be an effective tool for monitoring changes in performance. However, research is required in a recreational sample to see if this relationship is replicated.
+
+In agreement with Gee et al. [-@gee2020Repeated2018] and Bakatchina et al. [-@bakatchinaEffectRepeatedOnfield2023], the players in this study had greater increases in time for the later sprints over increasing distances, additionally, in Bakatchina et al. [-@bakatchinaEffectRepeatedOnfield2023] study the authors found differences in the rate of decline in performance over 6 x 20m RS between LP and HP players. This was attributed to the HP players having a higher physical capacity and, thus, greater fatigue resistance. In contrast, we found that both the SCI and Non-Sci players showed similar performances in the RS across all distances and all sprint numbers. This, the authors speculate, may have resulted from Non-SCI players pacing themselves during the RS as the average fastest time to complete the three initial 20m trials was 6.38 ± 0.58s compared to 66.4 ± 0.70s in the RS trials. In summary, in this recreational sample, all groups showed a decline in performance across the RS trials, which can be attributed to fatigue. However, there was no difference in performance based on disability or game classification.
+
+## Limitations and Future Research
+
+The study had several limitations that have been acknowledged; firstly, the sample size was relatively small and covered a broad age range of predominantly males. Additionally, there were more Fives than Fours players in the study, with an overall larger representation of the SCI impairment type. All of those ranged from novice to experienced WCR players using their wheelchair configurations, which were not standardised. Future research should investigate research on a larger sample size to investigate game formats of non-elite players, as well as the further specification of the subcategories of impairments. There is also a need for further research investigating the user interface with the wheelchair and cost-effective solutions to optimise both personal equipment and the wheelchair.
+
+# Perspectives
+
+This work addresses a gap in the current literature by investigating the sprint and RS performances of recreational Fours and Fives and adds to the literature comparing WCR players with and without an SCI. For the first time, cross-sectional data on sprint and RS performance in recreational Fours and Fives WCR players is available to coaches and players and could be used as a benchmark against which to compare. Based on the results of this study in this recreational sample, there appears to be little difference in sprint and RS performance between players in the two different game formats. Therefore, it is suggested that there is no need to run separate training sessions based on sprint and RS ability alone. At a recreational level, this may be desirable to ensure adequate numbers participate in training sessions to make the sessions worthwhile and competitive. This study provides an initial insight into the differences between Fours and Fives WCR players, which future studies can build on.
+
+# Contributions
+
+CM and LB conceived of and designed the study, acquired the data, interpreted the results, and drafted the manuscript. JS contributed the data analysis, interpretation of the results, and revision of the manuscript. All authors provided final approval of the version to be published.
+
+# Funding Information
+
+No funding was received for this project.
+
+# Data and Supplementary Material Accessibility
+
+All extracted data and code utilised for data preparation and analyses are available in either the Open Science Framework page for this project [https://osf.io/y2jdb/](https://osf.io/y2jdb/) or the corresponding GitHub repository [https://github.com/jamessteeleii/wheelchair_rugby_sprints](https://github.com/jamessteeleii/wheelchair_rugby_sprints). All supplementary files are also available there.
